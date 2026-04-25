@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>栃木市移動サポート</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>栃木市移動サポート</h1>
+      <p class="subtext">自分用のバス・タクシー確認アプリ</p>
+    </header>
+
+    <nav class="menu">
+      <button class="menu-button" onclick="showSection('home')">トップ</button>
+      <button class="menu-button" onclick="showSection('bus')">バス時刻表</button>
+      <button class="menu-button" onclick="showSection('routeMap')">路線図</button>
+      <button class="menu-button" onclick="showSection('kurataku')">蔵タク</button>
+      <button class="menu-button" onclick="showSection('places')">よく使う場所</button>
+    </nav>
+
+    <section id="home" class="content-section active">
+      <h2>トップ</h2>
+      <p>
+        このアプリは、栃木市で移動するときに必要な情報を、
+        自分用にすぐ確認するためのアプリです。
+      </p>
+
+      <div class="card">
+        <h3>できること</h3>
+        <ul>
+          <li>バス時刻表の確認</li>
+          <li>次のバス時刻の確認</li>
+          <li>全体路線図の確認</li>
+          <li>蔵タクの電話発信</li>
+          <li>よく使う場所の地図表示</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="bus" class="content-section">
+      <h2>バス時刻表</h2>
+      <p>停留所を選ぶと、時刻表と次のバスを表示します。</p>
+
+      <div class="card">
+        <h3>栃木市公式 時刻表ページ</h3>
+        <p>公式の時刻表案内ページを開きます。</p>
+        <a class="link-button timetable-link" href="https://www.city.tochigi.lg.jp/soshiki/20/325.html" target="_blank">
+          時刻表ページを開く
+        </a>
+      </div>
+
+      <div class="stop-buttons">
+        <button class="stop-button" onclick="showTimetable('栃木駅（北口）')">栃木駅</button>
+        <button class="stop-button" onclick="showTimetable('市役所前')">市役所前</button>
+        <button class="stop-button" onclick="showTimetable('イオン')">イオン</button>
+        <button class="stop-button" onclick="showTimetable('新栃木駅')">新栃木駅</button>
+        <button class="stop-button" onclick="showTimetable('とちぎメディカルセンターしもつが')">しもつが</button>
+        <button class="stop-button" onclick="showTimetable('ヤオハンアイム前')">ヤオハンアイム前</button>
+        <button class="stop-button" onclick="showTimetable('新栃木駅西')">新栃木駅西</button>
+      </div>
+
+      <div id="timetable-area" class="card">
+        <h3>時刻表表示エリア</h3>
+        <p>上の停留所ボタンを押してください。</p>
+      </div>
+    </section>
+
+    <section id="routeMap" class="content-section">
+      <h2>全体路線図</h2>
+      <p>栃木市の全体路線図を確認できます。</p>
+
+      <div class="card">
+        <h3>路線図画像</h3>
+        <p>画像をタップすると拡大表示しやすくなります。</p>
+        <a href="route_map.png" target="_blank">
+          <img src="route_map.png" alt="栃木市 全体路線図" class="route-map-image">
+        </a>
+      </div>
+
+      <div class="card">
+        <h3>PDFを開く</h3>
+        <p>元のPDFを確認したい場合はこちら。</p>
+        <a class="link-button pdf-link" href="全体路線図.pdf" target="_blank">PDFを開く</a>
+      </div>
+    </section>
+
+    <section id="kurataku" class="content-section">
+      <h2>蔵タク</h2>
+
+      <div class="card">
+        <h3>予約時に伝える内容</h3>
+        <ul>
+          <li>名前</li>
+          <li>電話番号</li>
+          <li>利用日</li>
+          <li>利用時間</li>
+          <li>乗る場所</li>
+          <li>降りる場所</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>予約先</h3>
+        <p>必要に応じて実際の番号へ変更してください。</p>
+        <a class="link-button" href="tel:00000000000">電話をかける</a>
+      </div>
+    </section>
+
+    <section id="places" class="content-section">
+      <h2>よく使う場所</h2>
+
+      <div class="card">
+        <h3>栃木駅</h3>
+        <a class="link-button" href="https://maps.google.com/?q=栃木駅" target="_blank">地図を開く</a>
+      </div>
+
+      <div class="card">
+        <h3>栃木市役所</h3>
+        <a class="link-button" href="https://maps.google.com/?q=栃木市役所" target="_blank">地図を開く</a>
+      </div>
+
+      <div class="card">
+        <h3>イオン</h3>
+        <a class="link-button" href="https://maps.google.com/?q=イオン栃木店" target="_blank">地図を開く</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
