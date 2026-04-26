@@ -44,7 +44,9 @@ body {
   cursor: pointer;
 }
 
-.menu-button:hover {
+.menu-button:hover,
+.stop-button:hover,
+.link-button:hover {
   opacity: 0.9;
 }
 
@@ -73,6 +75,16 @@ body {
   margin-top: 0;
 }
 
+.stop-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+}
+
 .stop-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -89,10 +101,6 @@ body {
   background-color: #ff9800;
   color: white;
   cursor: pointer;
-}
-
-.stop-button:hover {
-  opacity: 0.9;
 }
 
 .link-button {
@@ -147,9 +155,15 @@ body {
   font-weight: bold;
 }
 
+.next-bus-guide {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
 .next-bus-time {
   margin: 0 0 4px 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -192,8 +206,14 @@ body {
 }
 
 .direction-title {
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
   font-weight: bold;
+}
+
+.direction-guide {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .direction-block.east .direction-title {
@@ -208,6 +228,23 @@ body {
   margin: 0;
   line-height: 1.6;
   word-break: break-word;
+}
+
+.route-map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.timetable-link {
+  background-color: #6f42c1;
+}
+
+.pdf-link {
+  background-color: #444;
 }
 
 ul {
@@ -235,24 +272,4 @@ li {
   .stop-button {
     font-size: 15px;
   }
-
-.route-map-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
 }
-
-.timetable-link {
-  background-color: #6f42c1;
-}
-
-.pdf-link {
-  background-color: #444;
-}
-
-}
-
-

@@ -1,3 +1,6 @@
+let timetable = {};
+let routeGuides = {};
+
 function showSection(sectionId) {
   const sections = document.querySelectorAll(".content-section");
 
@@ -8,80 +11,55 @@ function showSection(sectionId) {
   document.getElementById(sectionId).classList.add("active");
 }
 
-const timetable = {
-  "栃木駅（北口）": {
-    "市街地北部循環線": {
-      "東回り": ["7:20", "9:20", "11:20", "13:20", "15:20", "17:20"],
-      "西回り": ["8:20", "10:20", "12:20", "14:20", "16:20", "18:20"]
-    },
-    "市街地循環線": {
-      "東回り": ["7:55", "10:11", "12:43", "15:15", "17:47"],
-      "西回り": ["8:55", "11:27", "13:59", "16:31", "19:03"]
-    }
-  },
+async function loadTimetable() {
+  const stopButtonsArea = document.getElementById("stop-buttons");
 
-  "市役所前": {
-    "市街地北部循環線": {
-      "東回り": ["7:24", "9:24", "11:24", "13:24", "15:24", "17:24"],
-      "西回り": ["8:54", "10:54", "12:54", "14:54", "16:54", "18:54"]
-    },
-    "市街地循環線": {
-      "東回り": ["8:12", "10:39", "13:11", "15:43", "18:15"],
-      "西回り": ["9:06", "11:38", "14:10", "16:42", "19:14"]
-    }
-  },
+  try {
+    const response = await fetch("timetable.json");
 
-  "イオン": {
-    "市街地北部循環線": {
-      "東回り": ["7:38", "9:38", "11:38", "13:38", "15:38", "17:38"],
-      "西回り": ["8:40", "10:40", "12:40", "14:40", "16:40", "18:40"]
-    },
-    "市街地循環線": {
-      "東回り": ["10:30", "13:02", "15:34", "18:06"],
-      "西回り": ["9:16", "11:48", "14:20", "16:52"]
+    if (!response.ok) {
+      throw new Error("timetable.json を読み込めませんでした");
     }
-  },
 
-  "新栃木駅": {
-    "市街地北部循環線": {
-      "東回り": ["7:29", "9:29", "11:29", "13:29", "15:29", "17:29"],
-      "西回り": ["8:49", "10:49", "12:49", "14:49", "16:49", "18:49"]
-    },
-    "市街地循環線": {
-      "東回り": ["8:06", "10:22", "12:54", "15:26", "17:58"],
-      "西回り": ["9:25", "11:57", "14:29", "17:01", "19:21"]
-    }
-  },
+    const data = await response.json();
 
-  "とちぎメディカルセンターしもつが": {
-    "市街地循環線": {
-      "東回り": ["7:48", "10:04", "12:36", "15:08", "17:40"],
-      "西回り": ["8:48", "11:20", "13:52", "16:24", "18:56"]
-    }
-  },
+    timetable = data.stops || {};
+    routeGuides = data.routeGuides || {};
 
-  "ヤオハンアイム前": {
-    "市街地北部循環線": {
-      "東回り": ["7:32", "9:32", "11:32", "13:32", "15:32", "17:32"],
-      "西回り": ["8:46", "10:46", "12:46", "14:46", "16:46", "18:46"]
-    },
-    "市街地循環線": {
-      "東回り": ["8:08", "10:24", "12:56", "15:28", "18:00"],
-      "西回り": ["9:22", "11:54", "14:26", "16:58", "19:18"]
-    }
-  },
-
-  "新栃木駅西": {
-    "市街地北部循環線": {
-      "東回り": ["7:28", "9:28", "11:28", "13:28", "15:28", "17:28"],
-      "西回り": ["8:50", "10:50", "12:50", "14:50", "16:50", "18:50"]
-    },
-    "市街地循環線": {
-      "東回り": ["8:07", "10:23", "12:55", "15:27", "17:59"],
-      "西回り": ["9:23", "11:55", "14:27", "16:59", "19:19"]
-    }
+    renderStopButtons();
+  } catch (error) {
+    console.error(error);
+    stopButtonsArea.innerHTML = `
+      <p>時刻表データの読み込みに失敗しました。</p>
+      <p>timetable.json が同じ階層にあるか確認してください。</p>
+    `;
   }
-};
+}
+
+function renderStopButtons() {
+  const stopButtonsArea = document.getElementById("stop-buttons");
+  const searchInput = document.getElementById("stop-search");
+  const keyword = searchInput ? searchInput.value.trim() : "";
+
+  const stopNames = Object.keys(timetable).filter(stopName => {
+    return keyword === "" || stopName.includes(keyword);
+  });
+
+  if (stopNames.length === 0) {
+    stopButtonsArea.innerHTML = `<p>該当する停留所がありません。</p>`;
+    return;
+  }
+
+  stopButtonsArea.innerHTML = stopNames.map(stopName => `
+    <button class="stop-button" onclick="showTimetable('${escapeSingleQuote(stopName)}')">
+      ${stopName}
+    </button>
+  `).join("");
+}
+
+function escapeSingleQuote(text) {
+  return text.replace(/'/g, "\\'");
+}
 
 function timeToMinutes(timeStr) {
   const [hour, minute] = timeStr.split(":").map(Number);
@@ -105,8 +83,10 @@ function getNextBusInfo(timeArray) {
 
   for (let time of timeArray) {
     const busMinutes = timeToMinutes(time);
+
     if (busMinutes >= currentMinutes) {
       const diff = busMinutes - currentMinutes;
+
       return {
         nextTime: time,
         diffMinutes: diff,
@@ -126,20 +106,32 @@ function getDirectionClass(directionName) {
   if (directionName.includes("東")) {
     return "east";
   }
+
   if (directionName.includes("西")) {
     return "west";
   }
+
+  return "";
+}
+
+function getDirectionGuide(routeName, directionName) {
+  if (routeGuides[routeName] && routeGuides[routeName][directionName]) {
+    return routeGuides[routeName][directionName];
+  }
+
   return "";
 }
 
 function createNextBusHtml(routeName, directionName, timeArray) {
   const nextBus = getNextBusInfo(timeArray);
   const directionClass = getDirectionClass(directionName);
+  const guide = getDirectionGuide(routeName, directionName);
 
   if (nextBus.finished) {
     return `
       <div class="next-bus-card finished ${directionClass}">
         <p class="next-bus-route">${routeName} / ${directionName}</p>
+        ${guide ? `<p class="next-bus-guide">${guide}</p>` : ""}
         <p class="next-bus-text">本日の運行は終了しました</p>
       </div>
     `;
@@ -148,6 +140,7 @@ function createNextBusHtml(routeName, directionName, timeArray) {
   return `
     <div class="next-bus-card ${directionClass}">
       <p class="next-bus-route">${routeName} / ${directionName}</p>
+      ${guide ? `<p class="next-bus-guide">${guide}</p>` : ""}
       <p class="next-bus-time">${nextBus.nextTime}</p>
       <p class="next-bus-text">あと ${nextBus.diffMinutes} 分</p>
     </div>
@@ -187,10 +180,12 @@ function showTimetable(stopName) {
 
     for (let direction in data[route]) {
       const directionClass = getDirectionClass(direction);
+      const guide = getDirectionGuide(route, direction);
 
       html += `
         <div class="direction-block ${directionClass}">
           <p class="direction-title">${direction}</p>
+          ${guide ? `<p class="direction-guide">${guide}</p>` : ""}
           <p class="time-list">${data[route][direction].join(" / ")}</p>
         </div>
       `;
@@ -201,3 +196,5 @@ function showTimetable(stopName) {
 
   area.innerHTML = html;
 }
+
+loadTimetable();
