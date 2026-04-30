@@ -1,322 +1,83 @@
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-<!-- HTML基本メモ（初心者向け） -->
-<!-- HTML = 画面の部品を置く / CSS = 見た目 / JavaScript = 動き -->
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
-<!--
-【<!DOCTYPE html>】
-このファイルがHTMLであることを宣言する。
-
-【<html>】
-HTML全体を囲む一番外側のタグ。
-
-【<head>】
-画面には直接表示されない設定を書く場所。
-文字コード、スマホ表示設定、タイトル、CSS読み込みなどを書く。
-
-【<body>】
-実際に画面に表示される内容を書く場所。
-
-【<div>】
-表示内容をまとめるための箱。
-一番よく使うタグ。
-
-【<header>】
-ページ上部のタイトル部分を表すタグ。
-
-【<nav>】
-メニューやナビゲーションをまとめるタグ。
-
-【<section>】
-機能ごとのまとまりを作るタグ。
-このアプリでは「トップ」「バス時刻表」「路線図」などを分けている。
-
-【<h1>〜<h6>】
-見出しタグ。
-h1 が一番大きく、h2、h3 と小さくなる。
-
-【<p>】
-文章を書くタグ。
-
-【<ul>】
-箇条書き全体を囲むタグ。
-
-【<li>】
-箇条書きの1行。
-
-【<button>】
-押せるボタンを作るタグ。
-
-【<a>】
-リンクを作るタグ。
-URLを開く、Googleマップを開く、電話をかける時にも使う。
-
-【<img>】
-画像を表示するタグ。
-
-【<input>】
-文字入力欄を作るタグ。
-
-【id】
-その部品だけに付ける名前。
-JavaScriptから特定の場所を探す時によく使う。
-
-【class】
-見た目や分類のための名前。
-CSSでデザインを付ける時によく使う。
-
-
-【onclick】
-ボタンなどを押した時に動く処理。
-
-【oninput】
-文字入力欄に入力した時に動く処理。
--->
-
-
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-<!-- <!DOCTYPE html> HTML宣言 -->
-<!-- このファイルがHTMLであることをブラウザに伝える -->
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
 <!DOCTYPE html>
 <html lang="ja">
-
-
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-<!-- <head> 基本設定 -->
-<!-- 文字コード・スマホ表示・タイトル・CSS読み込みを設定する -->
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
 <head>
-
-  <!--
-    【タグ解説】<meta charset="UTF-8">
-    日本語が文字化けしないようにする設定。
-  -->
   <meta charset="UTF-8">
-
-  <!--
-    【タグ解説】<meta name="viewport">
-    スマホ画面に合わせて表示するための設定。
-    スマホ向けアプリではほぼ必須。
-  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!--
-    【タグ解説】<title>
-    ブラウザのタブに表示されるタイトル。
-  -->
   <title>栃木市移動サポート</title>
-
-  <!--
-    【タグ解説】<link>
-    外部ファイルを読み込むタグ。
-    ここでは style.css を読み込んでいる。
-  -->
   <link rel="stylesheet" href="style.css">
-
 </head>
-
-
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-<!-- <body> 画面表示部分 -->
-<!-- 実際にユーザーの画面へ表示される内容を書く -->
-<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
 <body>
 
-  <!--
-    【タグ解説】<div class="app">
-    アプリ全体を包む箱。
-    class="app" により、style.css で横幅や余白を調整している。
-  -->
   <div class="app">
 
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <header> アプリタイトル部分 -->
-    <!-- アプリ名と説明文を表示する -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
     <header class="header">
-
-      <!--
-        【タグ解説】<h1>
-        ページ内で一番大きな見出し。
-        このアプリのタイトルとして使っている。
-      -->
       <h1>栃木市移動サポート</h1>
-
-      <!--
-        【タグ解説】<p>
-        文章を書くタグ。
-        class="subtext" で小さめの説明文として表示している。
-      -->
       <p class="subtext">自分用のバス・タクシー確認アプリ</p>
-
     </header>
 
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <nav> 画面切り替えメニュー -->
-    <!-- ボタンを押すと script.js の showSection() で画面を切り替える -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
-<!--
-【タグ解説】<button>
-押せるボタンを作るタグ。
-
-【onclick】
-ボタンを押した時に動く処理。
-showSection('home') は、id="home" の画面を表示する。
--->
-
     <nav class="menu app-menu">
-
-      <button class="menu-button menu-home" onclick="showSection('home')">
-      <span class="menu-icon">🏠</span>
-      <span class="menu-text">トップ</span>
-      </button>
-
-      <button class="menu-button menu-bus" onclick="showSection('bus')">
-      <span class="menu-icon">🚌</span>
-      <span class="menu-text">バス時刻表</span>
-      </button>
-
-      <button class="menu-button menu-map" onclick="showSection('routeMap')">
-      <span class="menu-icon">🗺️</span>
-      <span class="menu-text">路線図</span>
-      </button>
-
-      <button class="menu-button menu-taxi" onclick="showSection('kurataku')">
-      <span class="menu-icon">🚕</span>
-      <span class="menu-text">蔵タク</span>
-      </button>
-
-      <button class="menu-button menu-place" onclick="showSection('places')">
-      <span class="menu-icon">📍</span>
-      <span class="menu-text">よく使う場所</span>
-      </button>
-
+      <button class="menu-button menu-home" onclick="showSection('home')">🏠</button>
+      <button class="menu-button menu-bus" onclick="showSection('bus')">🚌</button>
+      <button class="menu-button menu-map" onclick="showSection('routeMap')">🗺️</button>
+      <button class="menu-button menu-taxi" onclick="showSection('kurataku')">🚕</button>
+      <button class="menu-button menu-place" onclick="showSection('places')">📍</button>
     </nav>
-
-
-
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <section id="home"> トップ画面 -->
-    <!-- アプリの説明と、できること一覧を表示する -->
-    <!-- active が付いているため、最初に表示される画面 -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
     <section id="home" class="content-section active home-section">
 
       <div class="hero-card">
-
-        <div class="hero-text-area">
-          <p class="hero-label">栃木市の移動をもっと便利に</p>
-
-          <h2 class="hero-title">
-            とち介ナビ
-          </h2>
-
-          <p class="hero-message">
-            バスや蔵タクを使うときに、必要な情報をすぐ確認できます。
+        <div class="hero-text">
+          <p class="hero-label">栃木市の移動サポート</p>
+          <h2 class="hero-title">とち介ナビ</h2>
+          <p class="hero-desc">
+            バス・蔵タク・地図をすぐ確認できます
           </p>
         </div>
 
-        <div class="hero-image-area">
-          <img
-            src="tochisuke.jpg"
-            alt="とち介"
-            class="hero-character"
-          >
+        <div class="hero-img">
+          <img src="tochisuke.jpg" alt="とち介">
         </div>
-
       </div>
 
+      <div class="main-grid">
 
-      <div class="home-main-buttons">
-
-        <button class="home-action-card bus-card" onclick="showSection('bus')">
-          <span class="home-action-icon">🚌</span>
-          <span class="home-action-title">バス時刻表</span>
-          <span class="home-action-text">次のバスと時刻表を確認</span>
+        <button class="main-card bus" onclick="showSection('bus')">
+          <div class="icon">🚌</div>
+          <div class="title">バス時刻表</div>
+          <div class="desc">次のバスを確認</div>
         </button>
 
-        <button class="home-action-card taxi-card" onclick="showSection('kurataku')">
-          <span class="home-action-icon">🚕</span>
-          <span class="home-action-title">蔵タク</span>
-          <span class="home-action-text">電話予約や利用メモを確認</span>
+        <button class="main-card taxi" onclick="showSection('kurataku')">
+          <div class="icon">🚕</div>
+          <div class="title">蔵タク</div>
+          <div class="desc">予約・電話</div>
         </button>
 
-        <button class="home-action-card map-card" onclick="showSection('routeMap')">
-          <span class="home-action-icon">🗺️</span>
-          <span class="home-action-title">路線図</span>
-          <span class="home-action-text">全体路線図を確認</span>
+        <button class="main-card map" onclick="showSection('routeMap')">
+          <div class="icon">🗺️</div>
+          <div class="title">路線図</div>
+          <div class="desc">全体を確認</div>
         </button>
 
-        <button class="home-action-card place-card" onclick="showSection('places')">
-          <span class="home-action-icon">📍</span>
-          <span class="home-action-title">よく使う場所</span>
-          <span class="home-action-text">地図ですぐ確認</span>
+        <button class="main-card place" onclick="showSection('places')">
+          <div class="icon">📍</div>
+          <div class="title">よく使う場所</div>
+          <div class="desc">地図を開く</div>
         </button>
 
-      </div>
-
-
-      <div class="home-message-card">
-        <p>
-          よく使う移動情報を、自分用にまとめたサポートアプリです。
-        </p>
       </div>
 
     </section>
 
-
-
-
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <section id="bus"> バス時刻表機能 -->
-    <!-- 停留所検索・停留所選択・時刻表表示を行う画面 -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
     <section id="bus" class="content-section">
-
-      <!--
-        【タグ解説】<section id="bus">
-        バス時刻表画面のまとまり。
-        メニューの showSection('bus') と対応している。
-      -->
-
       <h2>バス時刻表</h2>
-
       <p>停留所を選ぶと、時刻表と次のバスを表示します。</p>
 
-
-      <!--==============================-->
-      <!-- 【中項目】公式時刻表リンク -->
-      <!-- 栃木市公式サイトの時刻表ページを開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>栃木市公式 時刻表ページ</h3>
-
         <p>公式の時刻表案内ページを開きます。</p>
 
-        <!--
-          【タグ解説】<a>
-          リンクを作るタグ。
-
-          【href】
-          開く先のURL。
-
-          【target="_blank"】
-          新しいタブで開く設定。
-        -->
         <a
           class="link-button timetable-link"
           href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
@@ -324,38 +85,11 @@ showSection('home') は、id="home" の画面を表示する。
         >
           時刻表ページを開く
         </a>
-
       </div>
 
-
-      <!--==============================-->
-      <!-- 【中項目】停留所検索エリア -->
-      <!-- 停留所名を入力して、表示する停留所ボタンを絞り込む -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>停留所を選択</h3>
 
-        <!--
-          【タグ解説】<input>
-          文字入力欄を作るタグ。
-
-          【id="stop-search"】
-          JavaScriptがこの入力欄を探すための名前。
-
-          【class="stop-search"】
-          CSSで見た目を整えるための名前。
-
-          【type="text"】
-          文字入力欄という意味。
-
-          【placeholder】
-          入力前に薄く表示される案内文。
-
-          【oninput="renderStopButtons()"】
-          文字を入力するたびに renderStopButtons() が動く。
-        -->
         <input
           id="stop-search"
           class="stop-search"
@@ -364,81 +98,25 @@ showSection('home') は、id="home" の画面を表示する。
           oninput="renderStopButtons()"
         >
 
-
-        <!--==============================-->
-        <!-- 【中項目】停留所ボタン表示エリア -->
-        <!-- script.js が停留所ボタンを自動で表示する場所 -->
-        <!--==============================-->
-
-        <!--
-          【タグ解説】<div id="stop-buttons">
-          停留所ボタンを表示するための箱。
-
-          【id="stop-buttons"】
-          script.js の renderStopButtons() がこの場所を探し、
-          中身を自動で作り替える。
-        -->
         <div id="stop-buttons" class="stop-buttons">
           <p>時刻表データを読み込み中です。</p>
         </div>
-
       </div>
 
-
-      <!--==============================-->
-      <!-- 【中項目】時刻表表示エリア -->
-      <!-- 選択した停留所の時刻表と次のバスを表示する -->
-      <!--==============================-->
-
-      <!--
-        【タグ解説】<div id="timetable-area">
-        時刻表を表示するための箱。
-
-        【id="timetable-area"】
-        script.js の showTimetable() がこの場所を探し、
-        中身を書き換える。
-      -->
       <div id="timetable-area" class="card">
-
         <h3>時刻表表示エリア</h3>
-
         <p>上の停留所ボタンを押してください。</p>
-
       </div>
-
     </section>
 
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <section id="routeMap"> 全体路線図 -->
-    <!-- route_map.png を表示し、タップで拡大表示できるようにする -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
     <section id="routeMap" class="content-section">
-
       <h2>全体路線図</h2>
-
       <p>栃木市の全体路線図を確認できます。</p>
 
-
-      <!--==============================-->
-      <!-- 【中項目】路線図画像 -->
-      <!-- 画像を画面内に表示し、タップで画像ファイルを開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>路線図画像</h3>
-
         <p>画像をタップすると拡大表示しやすくなります。</p>
 
-        <!--
-          【タグ解説】<a> と <img>
-          a はリンク。
-          img は画像表示。
-
-          この場合、画像をタップすると route_map.png を新しいタブで開く。
-        -->
         <a href="route_map.png" target="_blank">
           <img
             src="route_map.png"
@@ -446,100 +124,34 @@ showSection('home') は、id="home" の画面を表示する。
             class="route-map-image"
           >
         </a>
-
-        <!--
-          【src】
-          表示する画像ファイル。
-
-          【alt】
-          画像が表示できない時の説明文。
-          音声読み上げにも役立つ。
-
-          【class="route-map-image"】
-          CSSで画像サイズなどを調整するための名前。
-        -->
-
       </div>
-
     </section>
 
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <section id="kurataku"> 蔵タク -->
-    <!-- 電話発信リンクと利用メモを表示する -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
     <section id="kurataku" class="content-section">
-
       <h2>蔵タク</h2>
-
       <p>蔵タクを利用するときの確認用です。</p>
 
-
-      <!--==============================-->
-      <!-- 【中項目】電話発信 -->
-      <!-- スマホでタップすると電話アプリを開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>電話</h3>
-
         <p>必要に応じて電話発信できます。</p>
-
-        <!--
-          【タグ解説】<a href="tel:電話番号">
-          電話発信用のリンク。
-          スマホで押すと電話アプリが開く。
-        -->
         <a class="link-button" href="tel:0282211234">電話する</a>
-
       </div>
 
-
-      <!--==============================-->
-      <!-- 【中項目】蔵タクメモ -->
-      <!-- 利用時に確認したい内容をメモとして表示する -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>メモ</h3>
-
         <ul>
           <li>予約制の移動手段</li>
           <li>利用条件や料金は公式情報で確認</li>
           <li>今後、詳細を追加予定</li>
         </ul>
-
       </div>
-
     </section>
 
-
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- <section id="places"> よく使う場所 -->
-    <!-- Googleマップ検索リンクを表示する -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
     <section id="places" class="content-section">
-
       <h2>よく使う場所</h2>
 
-
-      <!--==============================-->
-      <!-- 【中項目】栃木駅 -->
-      <!-- Googleマップで栃木駅を開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>栃木駅</h3>
-
-        <!--
-          【タグ解説】Googleマップ検索リンク
-          query= の後ろに検索したい場所を書く。
-        -->
         <a
           class="link-button"
           href="https://www.google.com/maps/search/?api=1&query=栃木駅"
@@ -547,19 +159,10 @@ showSection('home') は、id="home" の画面を表示する。
         >
           地図を開く
         </a>
-
       </div>
 
-
-      <!--==============================-->
-      <!-- 【中項目】栃木市役所 -->
-      <!-- Googleマップで栃木市役所を開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>栃木市役所</h3>
-
         <a
           class="link-button"
           href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
@@ -567,19 +170,10 @@ showSection('home') は、id="home" の画面を表示する。
         >
           地図を開く
         </a>
-
       </div>
 
-
-      <!--==============================-->
-      <!-- 【中項目】イオン栃木店 -->
-      <!-- Googleマップでイオン栃木店を開く -->
-      <!--==============================-->
-
       <div class="card">
-
         <h3>イオン栃木店</h3>
-
         <a
           class="link-button"
           href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
@@ -587,29 +181,11 @@ showSection('home') は、id="home" の画面を表示する。
         >
           地図を開く
         </a>
-
       </div>
-
     </section>
 
   </div>
 
-
-  <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-  <!-- <script> JavaScript読み込み -->
-  <!-- 画面切り替え・停留所検索・時刻表表示などの動きを読み込む -->
-  <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-
-  <!--
-    【タグ解説】<script>
-    JavaScriptファイルを読み込むタグ。
-
-    【src="script.js"】
-    script.js を読み込む。
-
-    この位置に置く理由：
-    HTMLの部品を読み込んだ後にJavaScriptを読み込むため。
-  -->
   <script src="script.js"></script>
 
 </body>
