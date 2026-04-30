@@ -573,3 +573,22 @@ li {
     grid-template-columns: 1fr;
   }
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【修正】カード内アイコンを大きく見せる */
+/* 画像内の透明余白が大きい場合でも見た目を拡大する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.main-card .icon {
+  width: 88px;
+  height: 88px;
+  overflow: visible;
+}
+
+.main-card .icon img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  transform: scale(1.35);
+  transform-origin: center;
+}
