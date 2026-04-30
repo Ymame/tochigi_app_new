@@ -1,192 +1,73 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>栃木市移動サポート</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+<!-- 【中央】メイン機能カード（アイコン画像版） -->
+<!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-<body>
+<div class="main-grid">
 
-  <div class="app">
+  <!--==============================-->
+  <!-- 【バス】 -->
+  <!--==============================-->
+  <button class="main-card bus" onclick="showSection('bus')">
 
-    <header class="header">
-      <h1>栃木市移動サポート</h1>
-      <p class="subtext">自分用のバス・タクシー確認アプリ</p>
-    </header>
+    <!-- アイコン -->
+    <div class="icon">
+      <img src="icons/bus.png" alt="バス">
+    </div>
 
-    <nav class="menu app-menu">
-      <button class="menu-button menu-home" onclick="showSection('home')">🏠</button>
-      <button class="menu-button menu-bus" onclick="showSection('bus')">🚌</button>
-      <button class="menu-button menu-map" onclick="showSection('routeMap')">🗺️</button>
-      <button class="menu-button menu-taxi" onclick="showSection('kurataku')">🚕</button>
-      <button class="menu-button menu-place" onclick="showSection('places')">📍</button>
-    </nav>
+    <!-- タイトル -->
+    <div class="title">バス時刻表</div>
 
-    <section id="home" class="content-section active home-section">
+    <!-- 説明 -->
+    <div class="desc">次のバスを確認</div>
 
-      <div class="hero-card">
-        <div class="hero-text">
-          <p class="hero-label">栃木市の移動サポート</p>
-          <h2 class="hero-title">とち介ナビ</h2>
-          <p class="hero-desc">
-            バス・蔵タク・地図をすぐ確認できます
-          </p>
-        </div>
+  </button>
 
-        <div class="hero-img">
-          <img src="tochisuke.jpg" alt="とち介">
-        </div>
-      </div>
 
-      <div class="main-grid">
+  <!--==============================-->
+  <!-- 【蔵タク】 -->
+  <!--==============================-->
+  <button class="main-card taxi" onclick="showSection('kurataku')">
 
-        <button class="main-card bus" onclick="showSection('bus')">
-          <div class="icon">🚌</div>
-          <div class="title">バス時刻表</div>
-          <div class="desc">次のバスを確認</div>
-        </button>
+    <div class="icon">
+      <img src="icons/taxi.png" alt="タクシー">
+    </div>
 
-        <button class="main-card taxi" onclick="showSection('kurataku')">
-          <div class="icon">🚕</div>
-          <div class="title">蔵タク</div>
-          <div class="desc">予約・電話</div>
-        </button>
+    <div class="title">蔵タク</div>
 
-        <button class="main-card map" onclick="showSection('routeMap')">
-          <div class="icon">🗺️</div>
-          <div class="title">路線図</div>
-          <div class="desc">全体を確認</div>
-        </button>
+    <div class="desc">予約・電話</div>
 
-        <button class="main-card place" onclick="showSection('places')">
-          <div class="icon">📍</div>
-          <div class="title">よく使う場所</div>
-          <div class="desc">地図を開く</div>
-        </button>
+  </button>
 
-      </div>
 
-    </section>
+  <!--==============================-->
+  <!-- 【路線図】 -->
+  <!--==============================-->
+  <button class="main-card map" onclick="showSection('routeMap')">
 
-    <section id="bus" class="content-section">
-      <h2>バス時刻表</h2>
-      <p>停留所を選ぶと、時刻表と次のバスを表示します。</p>
+    <div class="icon">
+      <img src="icons/map.png" alt="路線図">
+    </div>
 
-      <div class="card">
-        <h3>栃木市公式 時刻表ページ</h3>
-        <p>公式の時刻表案内ページを開きます。</p>
+    <div class="title">路線図</div>
 
-        <a
-          class="link-button timetable-link"
-          href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
-          target="_blank"
-        >
-          時刻表ページを開く
-        </a>
-      </div>
+    <div class="desc">全体を確認</div>
 
-      <div class="card">
-        <h3>停留所を選択</h3>
+  </button>
 
-        <input
-          id="stop-search"
-          class="stop-search"
-          type="text"
-          placeholder="停留所名で検索"
-          oninput="renderStopButtons()"
-        >
 
-        <div id="stop-buttons" class="stop-buttons">
-          <p>時刻表データを読み込み中です。</p>
-        </div>
-      </div>
+  <!--==============================-->
+  <!-- 【よく使う場所】 -->
+  <!--==============================-->
+  <button class="main-card place" onclick="showSection('places')">
 
-      <div id="timetable-area" class="card">
-        <h3>時刻表表示エリア</h3>
-        <p>上の停留所ボタンを押してください。</p>
-      </div>
-    </section>
+    <div class="icon">
+      <img src="icons/place.png" alt="場所">
+    </div>
 
-    <section id="routeMap" class="content-section">
-      <h2>全体路線図</h2>
-      <p>栃木市の全体路線図を確認できます。</p>
+    <div class="title">よく使う場所</div>
 
-      <div class="card">
-        <h3>路線図画像</h3>
-        <p>画像をタップすると拡大表示しやすくなります。</p>
+    <div class="desc">地図を開く</div>
 
-        <a href="route_map.png" target="_blank">
-          <img
-            src="route_map.png"
-            alt="栃木市 全体路線図"
-            class="route-map-image"
-          >
-        </a>
-      </div>
-    </section>
+  </button>
 
-    <section id="kurataku" class="content-section">
-      <h2>蔵タク</h2>
-      <p>蔵タクを利用するときの確認用です。</p>
-
-      <div class="card">
-        <h3>電話</h3>
-        <p>必要に応じて電話発信できます。</p>
-        <a class="link-button" href="tel:0282211234">電話する</a>
-      </div>
-
-      <div class="card">
-        <h3>メモ</h3>
-        <ul>
-          <li>予約制の移動手段</li>
-          <li>利用条件や料金は公式情報で確認</li>
-          <li>今後、詳細を追加予定</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="places" class="content-section">
-      <h2>よく使う場所</h2>
-
-      <div class="card">
-        <h3>栃木駅</h3>
-        <a
-          class="link-button"
-          href="https://www.google.com/maps/search/?api=1&query=栃木駅"
-          target="_blank"
-        >
-          地図を開く
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>栃木市役所</h3>
-        <a
-          class="link-button"
-          href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
-          target="_blank"
-        >
-          地図を開く
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>イオン栃木店</h3>
-        <a
-          class="link-button"
-          href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
-          target="_blank"
-        >
-          地図を開く
-        </a>
-      </div>
-    </section>
-
-  </div>
-
-  <script src="script.js"></script>
-
-</body>
-</html>
+</div>
