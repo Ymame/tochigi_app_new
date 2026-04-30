@@ -65,6 +65,7 @@ JavaScriptから特定の場所を探す時によく使う。
 見た目や分類のための名前。
 CSSでデザインを付ける時によく使う。
 
+
 【onclick】
 ボタンなどを押した時に動く処理。
 
@@ -162,31 +163,45 @@ CSSでデザインを付ける時によく使う。
     <!-- ボタンを押すと script.js の showSection() で画面を切り替える -->
     <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-    <nav class="menu">
+<!--
+【タグ解説】<button>
+押せるボタンを作るタグ。
 
-      <!--
-        【タグ解説】<button>
-        押せるボタンを作るタグ。
+【onclick】
+ボタンを押した時に動く処理。
+showSection('home') は、id="home" の画面を表示する。
+-->
 
-        【onclick】
-        ボタンを押した時に動く処理。
-        showSection('home') は、id="home" の画面を表示する。
-      -->
-      <button class="menu-button" onclick="showSection('home')">トップ</button>
+    <nav class="menu app-menu">
 
-      <!-- id="bus" の画面を表示する -->
-      <button class="menu-button" onclick="showSection('bus')">バス時刻表</button>
+      <button class="menu-button menu-home" onclick="showSection('home')">
+      <span class="menu-icon">🏠</span>
+      <span class="menu-text">トップ</span>
+      </button>
 
-      <!-- id="routeMap" の画面を表示する -->
-      <button class="menu-button" onclick="showSection('routeMap')">路線図</button>
+      <button class="menu-button menu-bus" onclick="showSection('bus')">
+      <span class="menu-icon">🚌</span>
+      <span class="menu-text">バス時刻表</span>
+      </button>
 
-      <!-- id="kurataku" の画面を表示する -->
-      <button class="menu-button" onclick="showSection('kurataku')">蔵タク</button>
+      <button class="menu-button menu-map" onclick="showSection('routeMap')">
+      <span class="menu-icon">🗺️</span>
+      <span class="menu-text">路線図</span>
+      </button>
 
-      <!-- id="places" の画面を表示する -->
-      <button class="menu-button" onclick="showSection('places')">よく使う場所</button>
+      <button class="menu-button menu-taxi" onclick="showSection('kurataku')">
+      <span class="menu-icon">🚕</span>
+      <span class="menu-text">蔵タク</span>
+      </button>
+
+      <button class="menu-button menu-place" onclick="showSection('places')">
+      <span class="menu-icon">📍</span>
+      <span class="menu-text">よく使う場所</span>
+      </button>
 
     </nav>
+
+
 
 
     <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
@@ -195,59 +210,72 @@ CSSでデザインを付ける時によく使う。
     <!-- active が付いているため、最初に表示される画面 -->
     <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
 
-    <section id="home" class="content-section active">
+    <section id="home" class="content-section active home-section">
 
-      <!--
-        【タグ解説】<section>
-        画面や機能ごとのまとまりを作るタグ。
+      <div class="hero-card">
 
-        【id="home"】
-        script.js の showSection('home') から呼び出される名前。
+        <div class="hero-text-area">
+          <p class="hero-label">栃木市の移動をもっと便利に</p>
 
-        【class="content-section active"】
-        content-section は画面共通の見た目。
-        active は現在表示中という意味。
-      -->
+          <h2 class="hero-title">
+            とち介ナビ
+          </h2>
 
-      <h2>トップ</h2>
+          <p class="hero-message">
+            バスや蔵タクを使うときに、必要な情報をすぐ確認できます。
+          </p>
+        </div>
 
-      <p>
-        このアプリは、栃木市で移動するときに必要な情報を、
-        自分用にすぐ確認するためのアプリです。
-      </p>
-
-
-      <!--==============================-->
-      <!-- 【中項目】できること一覧 -->
-      <!-- アプリで確認できる内容を箇条書きで表示する -->
-      <!--==============================-->
-
-      <div class="card">
-
-        <!--
-          【タグ解説】<div class="card">
-          内容をまとめる箱。
-          class="card" により、CSSでカード風の見た目になる。
-        -->
-
-        <h3>できること</h3>
-
-        <!--
-          【タグ解説】<ul> と <li>
-          ul は箇条書き全体。
-          li は箇条書きの1行。
-        -->
-        <ul>
-          <li>バス時刻表の確認</li>
-          <li>次のバス時刻の確認</li>
-          <li>全体路線図の確認</li>
-          <li>蔵タクの電話発信</li>
-          <li>よく使う場所の地図表示</li>
-        </ul>
+        <div class="hero-image-area">
+          <img
+            src="tochisuke.jpg"
+            alt="とち介"
+            class="hero-character"
+          >
+        </div>
 
       </div>
 
+
+      <div class="home-main-buttons">
+
+        <button class="home-action-card bus-card" onclick="showSection('bus')">
+          <span class="home-action-icon">🚌</span>
+          <span class="home-action-title">バス時刻表</span>
+          <span class="home-action-text">次のバスと時刻表を確認</span>
+        </button>
+
+        <button class="home-action-card taxi-card" onclick="showSection('kurataku')">
+          <span class="home-action-icon">🚕</span>
+          <span class="home-action-title">蔵タク</span>
+          <span class="home-action-text">電話予約や利用メモを確認</span>
+        </button>
+
+        <button class="home-action-card map-card" onclick="showSection('routeMap')">
+          <span class="home-action-icon">🗺️</span>
+          <span class="home-action-title">路線図</span>
+          <span class="home-action-text">全体路線図を確認</span>
+        </button>
+
+        <button class="home-action-card place-card" onclick="showSection('places')">
+          <span class="home-action-icon">📍</span>
+          <span class="home-action-title">よく使う場所</span>
+          <span class="home-action-text">地図ですぐ確認</span>
+        </button>
+
+      </div>
+
+
+      <div class="home-message-card">
+        <p>
+          よく使う移動情報を、自分用にまとめたサポートアプリです。
+        </p>
+      </div>
+
     </section>
+
+
+
 
 
     <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->

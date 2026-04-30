@@ -797,3 +797,231 @@ li {
   }
 
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【Step1】トップ画面アプリ風デザイン */
+/* とち介画像・カード型ボタン・やわらかい配色を追加 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+body {
+  background: linear-gradient(180deg, #fff7e8 0%, #f4f6f8 100%);
+}
+
+.header {
+  display: none;
+}
+
+.app {
+  max-width: 480px;
+  padding: 14px;
+}
+
+.app-menu {
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 48px;
+  border-radius: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.menu-icon {
+  font-size: 20px;
+}
+
+.menu-text {
+  font-size: 14px;
+}
+
+.menu-home {
+  background-color: #6c757d;
+}
+
+.menu-bus {
+  background-color: #198754;
+}
+
+.menu-map {
+  background-color: #0d6efd;
+}
+
+.menu-taxi {
+  background-color: #dc3545;
+}
+
+.menu-place {
+  background-color: #f59f00;
+}
+
+.home-section {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #fff3d6 0%, #ffffff 100%);
+  border: 2px solid #f2d49b;
+  box-shadow: 0 8px 18px rgba(120, 80, 20, 0.16);
+}
+
+.hero-label {
+  display: inline-block;
+  margin: 0 0 8px 0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background-color: #ffe1a8;
+  color: #8a5200;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  color: #3b2a1a;
+  letter-spacing: 0.05em;
+  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.hero-message {
+  margin: 10px 0 0 0;
+  line-height: 1.7;
+  font-size: 14px;
+  color: #5f4b32;
+}
+
+.hero-image-area {
+  text-align: center;
+}
+
+.hero-character {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  border-radius: 18px;
+}
+
+.home-main-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.home-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 132px;
+  padding: 16px;
+  border-radius: 22px;
+  border: 2px solid transparent;
+  background-color: white;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 7px 16px rgba(0, 0, 0, 0.13);
+}
+
+.home-action-icon {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.home-action-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.home-action-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.bus-card {
+  border-color: #198754;
+  background: #f0fff6;
+}
+
+.bus-card .home-action-title {
+  color: #147344;
+}
+
+.taxi-card {
+  border-color: #dc3545;
+  background: #fff4f4;
+}
+
+.taxi-card .home-action-title {
+  color: #c62828;
+}
+
+.map-card {
+  border-color: #0d6efd;
+  background: #f0f7ff;
+}
+
+.map-card .home-action-title {
+  color: #0b57d0;
+}
+
+.place-card {
+  border-color: #f59f00;
+  background: #fff8e8;
+}
+
+.place-card .home-action-title {
+  color: #c97800;
+}
+
+.home-message-card {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background-color: #ffffff;
+  border: 1px solid #eed7ae;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.home-message-card p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 14px;
+  color: #4c3a24;
+}
+
+@media (max-width: 480px) {
+  .app-menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-card {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .home-main-buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+}
