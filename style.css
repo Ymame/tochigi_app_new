@@ -1,7 +1,12 @@
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】全体設定 */
+/* アプリ全体の基本デザイン */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 body {
   margin: 0;
   font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
-  background: linear-gradient(#fff6e6, #f4f6f8);
+  background: linear-gradient(180deg, #fff7e8 0%, #f4f6f8 100%);
   color: #222;
 }
 
@@ -11,64 +16,39 @@ body {
   padding: 16px;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】ヘッダー */
+/* トップ画面では非表示にしてアプリ風にする */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .header {
   display: none;
 }
 
-.subtext {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
-}
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】上部メニュー */
+/* 画面切り替え用の小さなメニューボタン */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .menu {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.app-menu {
   display: flex;
-  justify-content: space-between;
   gap: 8px;
   margin-bottom: 14px;
 }
 
 .menu-button {
-  padding: 14px;
-  font-size: 20px;
+  flex: 1;
+  min-height: 46px;
+  padding: 10px 6px;
   border: none;
-  border-radius: 16px;
+  border-radius: 15px;
   background-color: #1f6feb;
   color: white;
+  font-size: 18px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.app-menu .menu-button {
-  flex: 1;
-  min-height: 48px;
-}
-
-.menu-home {
-  background-color: #6c757d;
-}
-
-.menu-bus {
-  background-color: #198754;
-}
-
-.menu-map {
-  background-color: #0d6efd;
-}
-
-.menu-taxi {
-  background-color: #dc3545;
-}
-
-.menu-place {
-  background-color: #f59f00;
 }
 
 .menu-button:hover,
@@ -77,6 +57,12 @@ body {
 .main-card:hover {
   opacity: 0.9;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】画面セクション */
+/* 各画面の表示・非表示を制御する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .content-section {
   display: none;
@@ -90,6 +76,12 @@ body {
   display: block;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】トップ画面 */
+/* とち介ナビ風トップデザイン */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .home-section {
   background: transparent;
   box-shadow: none;
@@ -98,14 +90,14 @@ body {
 
 .hero-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, #fff3d6, #ffffff);
-  border: 2px solid #f2d49b;
-  border-radius: 24px;
+  justify-content: space-between;
+  gap: 14px;
   padding: 18px;
   margin-bottom: 18px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #fff3d6 0%, #ffffff 100%);
+  border: 2px solid #f2d49b;
   box-shadow: 0 8px 18px rgba(120, 80, 20, 0.16);
 }
 
@@ -140,11 +132,17 @@ body {
 }
 
 .hero-img img {
-  width: 110px;
+  width: 108px;
   max-width: 100%;
   height: auto;
   border-radius: 18px;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】トップ画面カード */
+/* バス・蔵タク・路線図・よく使う場所のカード */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-grid {
   display: grid;
@@ -157,15 +155,44 @@ body {
   padding: 16px;
   border: 2px solid transparent;
   border-radius: 22px;
+  background-color: white;
   text-align: left;
   cursor: pointer;
   box-shadow: 0 7px 16px rgba(0, 0, 0, 0.13);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
+
+/*==============================*/
+/* 【中項目】カード内アイコン */
+/* 4つの画像アイコンの大きさと位置をそろえる */
+/*==============================*/
+
 .main-card .icon {
-  font-size: 34px;
-  margin-bottom: 8px;
+  width: 64px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
+
+.main-card .icon img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  display: block;
+}
+
+
+/*==============================*/
+/* 【中項目】カード文字 */
+/* タイトルと説明文 */
+/*==============================*/
 
 .main-card .title {
   font-size: 18px;
@@ -178,6 +205,12 @@ body {
   line-height: 1.5;
   color: #555;
 }
+
+
+/*==============================*/
+/* 【中項目】カード色分け */
+/* アイコン色とカード色を合わせる */
+/*==============================*/
 
 .bus {
   border-color: #198754;
@@ -215,6 +248,12 @@ body {
   color: #c97800;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】通常カード */
+/* バス時刻表・蔵タク・場所などで使う共通カード */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .card {
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -227,6 +266,12 @@ body {
 .card h4 {
   margin-top: 0;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】停留所検索 */
+/* 停留所検索欄と停留所ボタン */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .stop-search {
   width: 100%;
@@ -256,6 +301,12 @@ body {
   cursor: pointer;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】リンクボタン */
+/* 公式ページ・地図・電話リンク */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .link-button {
   display: inline-block;
   margin-top: 10px;
@@ -273,6 +324,12 @@ body {
 .pdf-link {
   background-color: #444;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】次のバス表示 */
+/* 次のバス時刻・方面・残り時間 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .current-time {
   margin-top: 0;
@@ -341,6 +398,12 @@ body {
   color: #333;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】時刻表一覧 */
+/* 路線・方面ごとの表示 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .route-block {
   margin-top: 16px;
   padding: 12px;
@@ -391,6 +454,12 @@ body {
   word-break: break-word;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】路線図画像 */
+/* route_map.png の表示 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .route-map-image {
   width: 100%;
   height: auto;
@@ -400,6 +469,12 @@ body {
   margin-top: 10px;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】箇条書き */
+/* ul / li の余白 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 ul {
   padding-left: 20px;
 }
@@ -408,18 +483,20 @@ li {
   margin-bottom: 6px;
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】スマホ対応 */
+/* 小さい画面での調整 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 @media (max-width: 480px) {
   .app {
     padding: 14px;
   }
 
-  .app-menu {
-    display: flex;
-  }
-
   .menu-button {
-    font-size: 18px;
-    padding: 12px 8px;
+    font-size: 17px;
+    padding: 10px 4px;
   }
 
   .hero-card {
@@ -436,71 +513,33 @@ li {
 
   .main-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   .main-card {
-    min-height: 124px;
+    min-height: 126px;
     padding: 14px;
+  }
+
+  .main-card .icon {
+    width: 60px;
+    height: 54px;
+  }
+
+  .main-card .icon img {
+    width: 50px;
+    height: 50px;
   }
 
   .main-card .title {
     font-size: 16px;
   }
 
+  .main-card .desc {
+    font-size: 12px;
+  }
+
   .stop-buttons {
     grid-template-columns: 1fr;
   }
-}
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】カード内アイコン調整 */
-/* アイコンサイズ・位置を統一する */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-/*==============================*/
-/* 【中項目】アイコンの枠 */
-/* すべて同じサイズ・中央揃え */
-/*==============================*/
-
-.main-card .icon {
-  width: 60px;           /* アイコン枠サイズ */
-  height: 60px;
-
-  display: flex;
-  align-items: center;   /* 縦中央 */
-  justify-content: center; /* 横中央 */
-
-  margin-bottom: 10px;
-}
-
-/*==============================*/
-/* 【中項目】画像サイズ */
-/* アイコン画像の大きさ統一 */
-/*==============================*/
-
-.main-card .icon img {
-  width: 36px;     /* ←ここで微調整可能 */
-  height: 36px;
-
-  object-fit: contain;
-}
-
-/*==============================*/
-/* 【中項目】カード全体の整列 */
-/* 左揃えを少し整える */
-/*==============================*/
-
-.main-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/*==============================*/
-/* 【中項目】タイトル位置 */
-/* アイコンとの距離調整 */
-/*==============================*/
-
-.main-card .title {
-  margin-top: 4px;
 }
