@@ -299,3 +299,19 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【追加】路線図画像 */
+/* 画像がカードからはみ出さないようにする */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.route-map-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
