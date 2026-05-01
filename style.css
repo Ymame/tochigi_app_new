@@ -297,3 +297,20 @@ body {
   justify-self: end;
   align-self: center;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【調整】矢印の見た目をアプリ風にする */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.main-card .arrow {
+  font-size: 22px;      /* 少し小さく */
+  font-weight: normal;  /* 太さを落とす */
+  color: #999;          /* グレーで控えめに */
+}
+
+/* 各色に少し合わせる（自然に見える） */
+.main-card.bus .arrow { color: #168a45; }
+.main-card.taxi .arrow { color: #d93636; }
+.main-card.map .arrow { color: #1976d2; }
+.main-card.place .arrow { color: #e58a00; }
