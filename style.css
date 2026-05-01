@@ -1,5 +1,5 @@
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 全体設定 */
+/* 【全体設定】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 body {
@@ -10,8 +10,8 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* アプリ全体 */
-/* 背景画像は app の中だけに表示する */
+/* 【アプリ本体】 */
+/* 背景画像をアプリ内だけに表示 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .app {
@@ -27,11 +27,11 @@ body {
   background-repeat: no-repeat;
 
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* メニュー */
+/* 【メニュー】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .menu {
@@ -52,15 +52,14 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* セクション共通 */
+/* 【セクション共通】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .content-section {
   display: none;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255,255,255,0.94);
   border-radius: 14px;
   padding: 16px;
-  box-sizing: border-box;
 }
 
 .content-section.active {
@@ -68,8 +67,8 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* トップ画面 */
-/* 背景画像を見せるため、白背景を消す */
+/* 【トップ専用】 */
+/* 背景を見せる */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 #home {
@@ -77,12 +76,13 @@ body {
   padding: 0;
 }
 
+/* ★ここが今回のキモ（位置調整） */
 .home-spacer {
-  height: 310px;
+  height: 380px; /* ←ここで位置を調整 */
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* トップカード配置 */
+/* 【カードグリッド】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-grid {
@@ -92,7 +92,7 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* トップカード本体 */
+/* 【トップカード】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-card {
@@ -107,7 +107,7 @@ body {
   text-align: left;
   cursor: pointer;
 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 /* アイコン */
@@ -126,72 +126,60 @@ body {
 .main-card-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .title {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 4px;
 }
 
 .desc {
   font-size: 12px;
-  line-height: 1.4;
   color: #333;
 }
 
 /* 矢印 */
 .arrow {
   font-size: 22px;
-  font-weight: normal;
-  line-height: 1;
   justify-self: end;
 }
 
-/* 色分け */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【カード色】 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .main-card.bus {
-  background-color: rgba(234, 248, 239, 0.92);
+  background-color: rgba(234,248,239,0.92);
   border: 2px solid #168a45;
   color: #168a45;
 }
 
 .main-card.taxi {
-  background-color: rgba(255, 241, 241, 0.92);
+  background-color: rgba(255,241,241,0.92);
   border: 2px solid #e24a4a;
   color: #d93636;
 }
 
 .main-card.map {
-  background-color: rgba(237, 246, 255, 0.92);
+  background-color: rgba(237,246,255,0.92);
   border: 2px solid #1e88e5;
   color: #1976d2;
 }
 
 .main-card.place {
-  background-color: rgba(255, 247, 230, 0.92);
+  background-color: rgba(255,247,230,0.92);
   border: 2px solid #f39c12;
   color: #e58a00;
 }
 
-.main-card.bus .arrow {
-  color: #168a45;
-}
-
-.main-card.taxi .arrow {
-  color: #d93636;
-}
-
-.main-card.map .arrow {
-  color: #1976d2;
-}
-
-.main-card.place .arrow {
-  color: #e58a00;
-}
+/* 矢印色 */
+.main-card.bus .arrow { color: #168a45; }
+.main-card.taxi .arrow { color: #d93636; }
+.main-card.map .arrow { color: #1976d2; }
+.main-card.place .arrow { color: #e58a00; }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 通常カード */
+/* 【通常カード】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .card,
@@ -204,7 +192,7 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* リンクボタン */
+/* 【リンクボタン】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .link-button {
@@ -226,19 +214,18 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 入力欄 */
+/* 【入力】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .stop-search {
   width: 100%;
-  box-sizing: border-box;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 停留所ボタン */
+/* 【停留所ボタン】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .stop-buttons {
@@ -254,57 +241,30 @@ body {
   border-radius: 8px;
   background: orange;
   color: white;
-  cursor: pointer;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 路線図画像 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.route-map-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
-}
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* スマホ調整 */
+/* 【スマホ調整】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 @media (max-width: 480px) {
+
   .app {
     border-radius: 0;
     padding: 14px;
   }
 
   .home-spacer {
-    height: 305px;
-  }
-
-  .main-grid {
-    gap: 10px;
+    height: 360px; /* スマホ用微調整 */
   }
 
   .main-card {
     grid-template-columns: 48px 1fr 14px;
-    min-height: 88px;
-    padding: 9px;
   }
 
   .main-card .icon img {
     width: 44px;
     height: 44px;
-  }
-
-  .title {
-    font-size: 15px;
-  }
-
-  .desc {
-    font-size: 11px;
   }
 
   .stop-buttons {
