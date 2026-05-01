@@ -575,46 +575,40 @@ li {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【修正】カード内アイコンを大きく見せる */
-/* 画像内の透明余白が大きい場合でも見た目を拡大する */
+/* 【追加】トップカード横並び */
+/* アイコン＋文字を横に並べる */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.main-card .icon {
-  width: 88px;
-  height: 88px;
-  overflow: visible;
+.home-card {
+  display: flex;              /* 横並びにする */
+  align-items: center;        /* 縦中央揃え */
+  gap: 12px;                  /* アイコンと文字の間 */
 }
 
-.main-card .icon img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  transform: scale(1.35);
-  transform-origin: center;
+/*==============================*/
+/* アイコン */
+/*==============================*/
+.home-card img {
+  width: 48px;
+  height: 48px;
 }
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【追加】トップカードを横並びにする */
-/* アイコンを左、文字を右に並べる */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.main-card {
+/*==============================*/
+/* テキスト全体 */
+/*==============================*/
+.home-card-text {
   display: flex;
-  align-items: center;
-  text-align: left;
-  gap: 10px;
+  flex-direction: column;     /* タイトル＋説明を縦に */
 }
 
-.main-card .icon {
-  flex-shrink: 0;
+/* タイトル */
+.home-card-title {
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.main-card .icon img {
-  width: 52px;
-  height: 52px;
-}
-
-.main-card-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* 説明文 */
+.home-card-desc {
+  font-size: 13px;
+  color: #555;
 }
