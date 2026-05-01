@@ -245,3 +245,37 @@ body {
   flex-direction: column !important;
   justify-content: center !important;
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【修正】トップカード色を薄い背景＋濃い枠線に戻す */
+/* ゴール画像のような淡いカードUIにする */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.main-card.bus {
+  background-color: #eaf8ef !important;
+  border: 2px solid #168a45 !important;
+  color: #168a45 !important;
+}
+
+.main-card.taxi {
+  background-color: #fff1f1 !important;
+  border: 2px solid #e24a4a !important;
+  color: #d93636 !important;
+}
+
+.main-card.map {
+  background-color: #edf6ff !important;
+  border: 2px solid #1e88e5 !important;
+  color: #1976d2 !important;
+}
+
+.main-card.place {
+  background-color: #fff7e6 !important;
+  border: 2px solid #f39c12 !important;
+  color: #e58a00 !important;
+}
+
+.main-card .desc {
+  color: #333 !important;
+  opacity: 1 !important;
+}
