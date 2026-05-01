@@ -8,94 +8,97 @@
 </head>
 
 <body>
+
   <div class="app">
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】メニュー -->
-    <!-- 【役割】画面を切り替えるボタン -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
     <nav class="menu">
-      <button class="menu-button active" data-section="home" onclick="showSection('home', this)">ホーム</button>
-      <button class="menu-button" data-section="bus" onclick="showSection('bus', this)">バス</button>
-      <button class="menu-button" data-section="routeMap" onclick="showSection('routeMap', this)">路線図</button>
-      <button class="menu-button" data-section="kurataku" onclick="showSection('kurataku', this)">蔵タク</button>
-      <button class="menu-button" data-section="places" onclick="showSection('places', this)">場所</button>
+      <button class="menu-button active" data-section="home" onclick="showSection('home', this)">
+        <span class="menu-text">ホーム</span>
+      </button>
+
+      <button class="menu-button" data-section="bus" onclick="showSection('bus', this)">
+        <img src="icons/bus.png" alt="バス" class="menu-icon">
+        <span class="menu-text">バス</span>
+      </button>
+
+      <button class="menu-button" data-section="routeMap" onclick="showSection('routeMap', this)">
+        <img src="icons/map.png" alt="路線図" class="menu-icon">
+        <span class="menu-text">路線図</span>
+      </button>
+
+      <button class="menu-button" data-section="kurataku" onclick="showSection('kurataku', this)">
+        <img src="icons/taxi.png" alt="蔵タク" class="menu-icon">
+        <span class="menu-text">蔵タク</span>
+      </button>
+
+      <button class="menu-button" data-section="places" onclick="showSection('places', this)">
+        <img src="icons/place.png" alt="場所" class="menu-icon">
+        <span class="menu-text">場所</span>
+      </button>
     </nav>
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】ホーム画面 -->
-    <!-- 【役割】アプリの入口 -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <section id="home" class="content-section active">
-      <h1>栃木市移動サポート</h1>
-      <p class="subtext">バス・蔵タク・路線図をすぐ確認する自分用アプリ</p>
+    <section id="home" class="content-section active home-section">
+      <div class="home-spacer"></div>
 
       <div class="main-grid">
-        <button class="main-card bus" onclick="showSection('bus')">
-          <span class="title">バス検索</span>
-          <span class="desc">出発地・到着地から探す</span>
-        </button>
 
-        <button class="main-card map" onclick="showSection('routeMap')">
-          <span class="title">路線図</span>
-          <span class="desc">画像で確認する</span>
+        <button class="main-card bus" onclick="showSection('bus')">
+          <div class="icon"><img src="icons/bus.png" alt="バス"></div>
+          <div class="main-card-text">
+            <div class="title">バス時刻表</div>
+            <div class="desc">時刻表の確認や次のバスをチェック</div>
+          </div>
+          <div class="arrow">›</div>
         </button>
 
         <button class="main-card taxi" onclick="showSection('kurataku')">
-          <span class="title">蔵タク</span>
-          <span class="desc">電話予約メモ</span>
+          <div class="icon"><img src="icons/taxi.png" alt="タクシー"></div>
+          <div class="main-card-text">
+            <div class="title">蔵タク</div>
+            <div class="desc">電話予約はこちらから</div>
+          </div>
+          <div class="arrow">›</div>
+        </button>
+
+        <button class="main-card map" onclick="showSection('routeMap')">
+          <div class="icon"><img src="icons/map.png" alt="路線図"></div>
+          <div class="main-card-text">
+            <div class="title">路線図</div>
+            <div class="desc">路線図を確認（PDFもこちらから）</div>
+          </div>
+          <div class="arrow">›</div>
         </button>
 
         <button class="main-card place" onclick="showSection('places')">
-          <span class="title">よく使う場所</span>
-          <span class="desc">地図リンク</span>
+          <div class="icon"><img src="icons/place.png" alt="場所"></div>
+          <div class="main-card-text">
+            <div class="title">よく使う場所</div>
+            <div class="desc">地図で場所を確認</div>
+          </div>
+          <div class="arrow">›</div>
         </button>
+
       </div>
     </section>
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】バス検索画面 -->
-    <!-- 【役割】出発地・到着地・時間条件から候補を探す -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
     <section id="bus" class="content-section">
-      <h2>バス検索</h2>
+      <h2>バス時刻表</h2>
 
-      <div class="card">
-        <h3>出発地 → 到着地 検索</h3>
+      <div class="card search-card">
+        <h3>出発地・到着地から検索</h3>
 
-        <label for="departure-select">出発地</label>
-        <select id="departure-select" class="form-control">
+        <label>出発地</label>
+        <select id="departure-select" class="route-select">
           <option value="">読み込み中...</option>
         </select>
 
-        <label for="arrival-select">到着地</label>
-        <select id="arrival-select" class="form-control">
+        <label>到着地</label>
+        <select id="arrival-select" class="route-select">
           <option value="">読み込み中...</option>
         </select>
-
-        <div class="time-mode-box">
-          <p class="box-title">検索条件</p>
-
-          <label>
-            <input type="radio" name="time-mode" value="now" checked onchange="changeTimeMode()">
-            現在時刻から探す
-          </label>
-
-          <label>
-            <input type="radio" name="time-mode" value="departure" onchange="changeTimeMode()">
-            出発時間を指定
-          </label>
-
-          <label>
-            <input type="radio" name="time-mode" value="arrival" onchange="changeTimeMode()">
-            到着時間を指定
-          </label>
-
-          <input id="time-input" class="form-control hidden" type="time">
-        </div>
 
         <div class="sort-options">
-          <p class="box-title">並び替え</p>
+          <p class="sort-title">並び順</p>
 
           <label>
             <input type="radio" name="sort-type" value="departure" checked>
@@ -122,32 +125,28 @@
 
       <div class="card">
         <h3>栃木市公式 時刻表ページ</h3>
-        <p>公式情報を確認したい場合はこちら。</p>
-        <a class="link-button timetable-link" href="https://www.city.tochigi.lg.jp/soshiki/20/325.html" target="_blank">
-          公式時刻表を開く
+        <p>公式の時刻表案内ページを開きます。</p>
+        <a class="link-button timetable-link"
+           href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
+           target="_blank">
+          時刻表ページを開く
         </a>
       </div>
     </section>
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】路線図画面 -->
-    <!-- 【役割】route_map.png を表示する -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
     <section id="routeMap" class="content-section">
       <h2>全体路線図</h2>
+      <p>栃木市の全体路線図を確認できます。</p>
 
       <div class="card">
-        <p>画像をタップすると拡大表示できます。</p>
+        <h3>路線図画像</h3>
+        <p>画像をタップすると拡大表示しやすくなります。</p>
         <a href="route_map.png" target="_blank">
           <img src="route_map.png" alt="栃木市 全体路線図" class="route-map-image">
         </a>
       </div>
     </section>
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】蔵タク画面 -->
-    <!-- 【役割】電話予約用の情報を表示する -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
     <section id="kurataku" class="content-section">
       <h2>蔵タク</h2>
 
@@ -161,31 +160,40 @@
         <h3>メモ</h3>
         <ul>
           <li>予約制の移動手段</li>
-          <li>利用前に公式情報を確認</li>
+          <li>利用条件や料金は公式情報で確認</li>
+          <li>今後、詳細を追加予定</li>
         </ul>
       </div>
     </section>
 
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
-    <!-- 【大項目】よく使う場所 -->
-    <!-- 【役割】よく行く場所の地図リンク -->
-    <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
     <section id="places" class="content-section">
       <h2>よく使う場所</h2>
 
-      <div class="card">
+      <div class="place-card-item">
         <h3>栃木駅</h3>
-        <a class="link-button map-link" href="https://maps.google.com/?q=栃木駅" target="_blank">地図を開く</a>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=栃木駅"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
 
-      <div class="card">
-        <h3>新栃木駅</h3>
-        <a class="link-button map-link" href="https://maps.google.com/?q=新栃木駅" target="_blank">地図を開く</a>
+      <div class="place-card-item">
+        <h3>栃木市役所</h3>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
 
-      <div class="card">
+      <div class="place-card-item">
         <h3>イオン栃木店</h3>
-        <a class="link-button map-link" href="https://maps.google.com/?q=イオン栃木店" target="_blank">地図を開く</a>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
     </section>
 
