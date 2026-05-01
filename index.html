@@ -11,46 +11,39 @@
 
   <div class="app">
 
-
     <nav class="menu">
-
-      <button class="menu-button active" onclick="showSection('home', this)">
+      <button class="menu-button active" data-section="home" onclick="showSection('home', this)">
         <span class="menu-text">ホーム</span>
       </button>
 
-      <button class="menu-button" onclick="showSection('bus', this)">
+      <button class="menu-button" data-section="bus" onclick="showSection('bus', this)">
         <img src="icons/bus.png" alt="バス" class="menu-icon">
         <span class="menu-text">バス</span>
       </button>
 
-      <button class="menu-button" onclick="showSection('routeMap', this)">
+      <button class="menu-button" data-section="routeMap" onclick="showSection('routeMap', this)">
         <img src="icons/map.png" alt="路線図" class="menu-icon">
         <span class="menu-text">路線図</span>
       </button>
 
-      <button class="menu-button" onclick="showSection('kurataku', this)">
+      <button class="menu-button" data-section="kurataku" onclick="showSection('kurataku', this)">
         <img src="icons/taxi.png" alt="蔵タク" class="menu-icon">
         <span class="menu-text">蔵タク</span>
       </button>
 
-      <button class="menu-button" onclick="showSection('places', this)">
+      <button class="menu-button" data-section="places" onclick="showSection('places', this)">
         <img src="icons/place.png" alt="場所" class="menu-icon">
         <span class="menu-text">場所</span>
       </button>
-
     </nav>
 
-
     <section id="home" class="content-section active home-section">
-
       <div class="home-spacer"></div>
 
       <div class="main-grid">
 
         <button class="main-card bus" onclick="showSection('bus')">
-          <div class="icon">
-            <img src="icons/bus.png" alt="バス">
-          </div>
+          <div class="icon"><img src="icons/bus.png" alt="バス"></div>
           <div class="main-card-text">
             <div class="title">バス時刻表</div>
             <div class="desc">時刻表の確認や次のバスをチェック</div>
@@ -59,9 +52,7 @@
         </button>
 
         <button class="main-card taxi" onclick="showSection('kurataku')">
-          <div class="icon">
-            <img src="icons/taxi.png" alt="タクシー">
-          </div>
+          <div class="icon"><img src="icons/taxi.png" alt="タクシー"></div>
           <div class="main-card-text">
             <div class="title">蔵タク</div>
             <div class="desc">電話予約はこちらから</div>
@@ -70,9 +61,7 @@
         </button>
 
         <button class="main-card map" onclick="showSection('routeMap')">
-          <div class="icon">
-            <img src="icons/map.png" alt="路線図">
-          </div>
+          <div class="icon"><img src="icons/map.png" alt="路線図"></div>
           <div class="main-card-text">
             <div class="title">路線図</div>
             <div class="desc">路線図を確認（PDFもこちらから）</div>
@@ -81,9 +70,7 @@
         </button>
 
         <button class="main-card place" onclick="showSection('places')">
-          <div class="icon">
-            <img src="icons/place.png" alt="場所">
-          </div>
+          <div class="icon"><img src="icons/place.png" alt="場所"></div>
           <div class="main-card-text">
             <div class="title">よく使う場所</div>
             <div class="desc">地図で場所を確認</div>
@@ -92,12 +79,30 @@
         </button>
 
       </div>
-
     </section>
 
     <section id="bus" class="content-section">
       <h2>バス時刻表</h2>
-      <p>停留所を選ぶと、時刻表と次のバスを表示します。</p>
+
+      <div class="card search-card">
+        <h3>出発地・到着地から検索</h3>
+
+        <label>出発地</label>
+        <select id="departure-select" class="route-select">
+          <option value="">読み込み中...</option>
+        </select>
+
+        <label>到着地</label>
+        <select id="arrival-select" class="route-select">
+          <option value="">読み込み中...</option>
+        </select>
+
+        <button class="search-button" onclick="searchRoute()">検索する</button>
+
+        <div id="route-search-result" class="route-search-result">
+          <p>出発地と到着地を選んで検索してください。</p>
+        </div>
+      </div>
 
       <div class="card">
         <h3>栃木市公式 時刻表ページ</h3>
@@ -144,7 +149,6 @@
 
     <section id="kurataku" class="content-section">
       <h2>蔵タク</h2>
-      <p>蔵タクを利用するときの確認用です。</p>
 
       <div class="card">
         <h3>電話</h3>
@@ -165,41 +169,24 @@
     <section id="places" class="content-section">
       <h2>よく使う場所</h2>
 
-      <div class="place-list">
+      <div class="place-card-item">
+        <h3>栃木駅</h3>
+        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=栃木駅" target="_blank">地図を開く</a>
+      </div>
 
-        <div class="place-card-item">
-          <h3>栃木駅</h3>
-          <a class="link-button map-link"
-             href="https://www.google.com/maps/search/?api=1&query=栃木駅"
-             target="_blank">
-            地図を開く
-          </a>
-        </div>
+      <div class="place-card-item">
+        <h3>栃木市役所</h3>
+        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=栃木市役所" target="_blank">地図を開く</a>
+      </div>
 
-        <div class="place-card-item">
-          <h3>栃木市役所</h3>
-          <a class="link-button map-link"
-             href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
-             target="_blank">
-            地図を開く
-          </a>
-        </div>
-
-        <div class="place-card-item">
-          <h3>イオン栃木店</h3>
-          <a class="link-button map-link"
-             href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
-             target="_blank">
-            地図を開く
-          </a>
-        </div>
-
+      <div class="place-card-item">
+        <h3>イオン栃木店</h3>
+        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=イオン栃木店" target="_blank">地図を開く</a>
       </div>
     </section>
 
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>

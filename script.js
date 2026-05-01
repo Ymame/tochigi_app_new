@@ -1,38 +1,14 @@
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】共通データ */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 let timetable = {};
 let routeGuides = {};
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】画面切り替え */
-/* タブ選択＋画面表示 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 function showSection(sectionId, clickedButton) {
-
-  /*==============================*/
-  /* 全画面を非表示 */
-  /*==============================*/
-
   const sections = document.querySelectorAll(".content-section");
 
   sections.forEach(section => {
     section.classList.remove("active");
   });
 
-  /*==============================*/
-  /* 指定画面だけ表示 */
-  /*==============================*/
-
   document.getElementById(sectionId).classList.add("active");
-
-
-  /*==============================*/
-  /* タブの選択状態を更新 */
-  /*==============================*/
 
   const menuButtons = document.querySelectorAll(".menu-button");
 
@@ -42,16 +18,15 @@ function showSection(sectionId, clickedButton) {
 
   if (clickedButton) {
     clickedButton.classList.add("active");
+  } else {
+    const targetButton = document.querySelector(`.menu-button[data-section="${sectionId}"]`);
+    if (targetButton) {
+      targetButton.classList.add("active");
+    }
   }
 }
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】時刻表読み込み */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 async function loadTimetable() {
-
   const stopButtonsArea = document.getElementById("stop-buttons");
 
   try {
@@ -67,23 +42,82 @@ async function loadTimetable() {
     routeGuides = data.routeGuides || {};
 
     renderStopButtons();
+    renderRouteSelects();
 
   } catch (error) {
     console.error(error);
 
     stopButtonsArea.innerHTML = `
       <p>時刻表データの読み込みに失敗しました。</p>
+      <p>timetable.json が同じ階層にあるか確認してください。</p>
     `;
   }
 }
 
+function renderRouteSelects() {
+  const departureSelect = document.getElementById("departure-select");
+  const arrivalSelect = document.getElementById("arrival-select");
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】停留所ボタン */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+  if (!departureSelect || !arrivalSelect) return;
+
+  const stopNames = Object.keys(timetable);
+
+  const optionsHtml = `
+    <option value="">選択してください</option>
+    ${stopNames.map(stopName => `<option value="${stopName}">${stopName}</option>`).join("")}
+  `;
+
+  departureSelect.innerHTML = optionsHtml;
+  arrivalSelect.innerHTML = optionsHtml;
+}
+
+function searchRoute() {
+  const departureSelect = document.getElementById("departure-select");
+  const arrivalSelect = document.getElementById("arrival-select");
+  const resultArea = document.getElementById("route-search-result");
+
+  const departure = departureSelect.value;
+  const arrival = arrivalSelect.value;
+
+  if (!departure || !arrival) {
+    resultArea.innerHTML = `<p>出発地と到着地を両方選んでください。</p>`;
+    return;
+  }
+
+  if (departure === arrival) {
+    resultArea.innerHTML = `<p>出発地と到着地が同じです。</p>`;
+    return;
+  }
+
+  const data = timetable[departure];
+
+  if (!data) {
+    resultArea.innerHTML = `<p>出発地の時刻表データがありません。</p>`;
+    return;
+  }
+
+  let html = `
+    <h4>検索結果</h4>
+    <p><strong>${departure}</strong> から <strong>${arrival}</strong> 方面を確認します。</p>
+    <p class="current-time">現在時刻：${getCurrentTimeText()}</p>
+  `;
+
+  for (let route in data) {
+    for (let direction in data[route]) {
+      html += createNextBusHtml(route, direction, data[route][direction]);
+    }
+  }
+
+  html += `
+    <p style="font-size:12px; color:#666;">
+      ※現在は出発地の次のバス候補を表示します。到着地に合う路線判定は次の段階で追加します。
+    </p>
+  `;
+
+  resultArea.innerHTML = html;
+}
 
 function renderStopButtons() {
-
   const stopButtonsArea = document.getElementById("stop-buttons");
   const searchInput = document.getElementById("stop-search");
 
@@ -105,19 +139,9 @@ function renderStopButtons() {
   `).join("");
 }
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】文字エスケープ */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 function escapeSingleQuote(text) {
   return text.replace(/'/g, "\\'");
 }
-
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】時刻処理 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function timeToMinutes(timeStr) {
   const [hour, minute] = timeStr.split(":").map(Number);
@@ -137,7 +161,6 @@ function getCurrentTimeText() {
 }
 
 function getNextBusInfo(timeArray) {
-
   const currentMinutes = getCurrentMinutes();
 
   for (let time of timeArray) {
@@ -159,21 +182,13 @@ function getNextBusInfo(timeArray) {
   };
 }
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】方面処理 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 function getDirectionClass(directionName) {
-
   if (directionName.includes("東")) return "east";
   if (directionName.includes("西")) return "west";
-
   return "";
 }
 
 function getDirectionGuide(routeName, directionName) {
-
   if (routeGuides[routeName] && routeGuides[routeName][directionName]) {
     return routeGuides[routeName][directionName];
   }
@@ -181,21 +196,15 @@ function getDirectionGuide(routeName, directionName) {
   return "";
 }
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】次のバス表示 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 function createNextBusHtml(routeName, directionName, timeArray) {
-
   const nextBus = getNextBusInfo(timeArray);
   const directionClass = getDirectionClass(directionName);
   const guide = getDirectionGuide(routeName, directionName);
 
   if (nextBus.finished) {
     return `
-      <div class="next-bus-card finished ${directionClass}">
-        <p>${routeName} / ${directionName}</p>
+      <div class="search-result-card finished ${directionClass}">
+        <p><strong>${routeName} / ${directionName}</strong></p>
         ${guide ? `<p>${guide}</p>` : ""}
         <p>本日の運行は終了しました</p>
       </div>
@@ -203,33 +212,30 @@ function createNextBusHtml(routeName, directionName, timeArray) {
   }
 
   return `
-    <div class="next-bus-card ${directionClass}">
-      <p>${routeName} / ${directionName}</p>
+    <div class="search-result-card ${directionClass}">
+      <p><strong>${routeName} / ${directionName}</strong></p>
       ${guide ? `<p>${guide}</p>` : ""}
-      <p>${nextBus.nextTime}</p>
+      <p style="font-size:20px; font-weight:bold;">${nextBus.nextTime}</p>
       <p>あと ${nextBus.diffMinutes} 分</p>
     </div>
   `;
 }
 
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【大項目】時刻表表示 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 function showTimetable(stopName) {
-
   const area = document.getElementById("timetable-area");
   const data = timetable[stopName];
 
   if (!data) {
-    area.innerHTML = `<p>データなし</p>`;
+    area.innerHTML = `
+      <h3>${stopName}</h3>
+      <p>時刻表データがありません。</p>
+    `;
     return;
   }
 
   let html = `
     <h3>${stopName}</h3>
-    <p>現在時刻：${getCurrentTimeText()}</p>
+    <p class="current-time">現在時刻：${getCurrentTimeText()}</p>
   `;
 
   for (let route in data) {
@@ -240,10 +246,5 @@ function showTimetable(stopName) {
 
   area.innerHTML = html;
 }
-
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【初期処理】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 loadTimetable();

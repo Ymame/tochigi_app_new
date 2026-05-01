@@ -1,7 +1,3 @@
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【全体設定】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 body {
   margin: 0;
   font-family: sans-serif;
@@ -9,34 +5,17 @@ body {
   color: #222;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【アプリ本体】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 .app {
   max-width: 480px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 16px;
   box-sizing: border-box;
-
   background-image: url("ichigo.png");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【メニュー】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【メニュー】 */
-/* 上部タブを小さくまとめ、アイコン＋文字で表示 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .menu {
   display: grid;
@@ -51,16 +30,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   min-height: 46px;
   padding: 4px 2px;
-
   border-radius: 9px;
   border: 1px solid rgba(0,0,0,0.08);
-
   background-color: rgba(255,255,255,0.9);
   color: #555;
-
   cursor: pointer;
 }
 
@@ -84,13 +59,11 @@ body {
   box-shadow: 0 3px 8px rgba(0,0,0,0.18);
 }
 
-.menu-button:active {
-  transform: scale(0.95);
+.menu-button:active,
+.main-card:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
 }
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【セクション共通】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .content-section {
   display: none;
@@ -103,23 +76,14 @@ body {
   display: block;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【トップ専用】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 #home {
   background: transparent;
   padding: 0;
 }
 
-/* ★ここが最重要（可変スペーサー） */
 .home-spacer {
   height: clamp(280px, 75vw, 380px);
 }
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【カードグリッド】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-grid {
   display: grid;
@@ -127,32 +91,19 @@ body {
   gap: 12px;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【トップカード】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 .main-card {
   display: grid;
   grid-template-columns: 52px 1fr 16px;
   align-items: center;
   column-gap: 8px;
-
   min-height: 94px;
   padding: 10px;
   border-radius: 14px;
   text-align: left;
   cursor: pointer;
-
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* タップ感（カード） */
-.main-card:active {
-  transform: scale(0.96);
-  filter: brightness(0.95);
-}
-
-/* アイコン */
 .main-card .icon {
   display: flex;
   justify-content: center;
@@ -164,7 +115,6 @@ body {
   height: 48px;
 }
 
-/* テキスト */
 .main-card-text {
   display: flex;
   flex-direction: column;
@@ -180,15 +130,10 @@ body {
   color: #333;
 }
 
-/* 矢印 */
 .arrow {
   font-size: 22px;
   justify-self: end;
 }
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【カード色】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-card.bus {
   background-color: rgba(234,248,239,0.92);
@@ -214,10 +159,6 @@ body {
   color: #e58a00;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【通常カード】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
 .card,
 .place-card-item {
   border: 1px solid #ddd;
@@ -227,11 +168,8 @@ body {
   background: #fafafa;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【ボタン】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.link-button {
+.link-button,
+.search-button {
   display: inline-block;
   margin-top: 10px;
   padding: 10px 14px;
@@ -239,22 +177,49 @@ body {
   background-color: #28a745;
   color: white;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【入力】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+.timetable-link {
+  background-color: #6f42c1;
+}
 
-.stop-search {
+.map-link {
+  background-color: #1f6feb;
+}
+
+.stop-search,
+.route-select {
   width: 100%;
+  box-sizing: border-box;
   padding: 10px;
+  margin: 6px 0 12px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【停留所ボタン】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+.search-button {
+  width: 100%;
+  background-color: #168a45;
+  font-weight: bold;
+}
+
+.route-search-result {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.search-result-card {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eef8ff;
+  border: 1px solid #b8d8ff;
+}
 
 .stop-buttons {
   display: grid;
@@ -269,16 +234,21 @@ body {
   border-radius: 8px;
   background: orange;
   color: white;
+  cursor: pointer;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【スマホ調整】 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+.route-map-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
 
 @media (max-width: 480px) {
-
   .app {
-    border-radius: 0;
     padding: 14px;
   }
 
@@ -298,20 +268,4 @@ body {
   .stop-buttons {
     grid-template-columns: 1fr;
   }
-}
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【追加】路線図画像 */
-/* 画像がカードからはみ出さないようにする */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.route-map-image {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
 }
