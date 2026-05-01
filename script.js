@@ -27,7 +27,6 @@ function showSection(sectionId, clickedButton) {
 }
 
 async function loadTimetable() {
-  const stopButtonsArea = document.getElementById("stop-buttons");
 
   try {
     const response = await fetch("timetable.json");
@@ -41,7 +40,6 @@ async function loadTimetable() {
     timetable = data.stops || {};
     routeGuides = data.routeGuides || {};
 
-    renderStopButtons();
     renderRouteSelects();
 
   } catch (error) {
