@@ -12,12 +12,29 @@
   <div class="app">
 
     <nav class="menu">
-      <button class="menu-button" onclick="showSection('home')">🏠</button>
-      <button class="menu-button" onclick="showSection('bus')">🚌</button>
-      <button class="menu-button" onclick="showSection('routeMap')">🗺️</button>
-      <button class="menu-button" onclick="showSection('kurataku')">🚕</button>
-      <button class="menu-button" onclick="showSection('places')">📍</button>
+
+      <button class="menu-button active" onclick="showSection('home', this)">
+        <span class="menu-text">ホーム</span>
+      </button>
+
+      <button class="menu-button" onclick="showSection('bus', this)">
+        <img src="icons/bus.png" alt="バス時刻表" class="menu-icon">
+      </button>
+
+      <button class="menu-button" onclick="showSection('routeMap', this)">
+        <img src="icons/map.png" alt="路線図" class="menu-icon">
+      </button>
+
+      <button class="menu-button" onclick="showSection('kurataku', this)">
+        <img src="icons/taxi.png" alt="蔵タク" class="menu-icon">
+      </button>
+
+      <button class="menu-button" onclick="showSection('places', this)">
+        <img src="icons/place.png" alt="よく使う場所" class="menu-icon">
+      </button>
+
     </nav>
+
 
     <section id="home" class="content-section active home-section">
 

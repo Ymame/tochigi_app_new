@@ -281,3 +281,41 @@ body {
   transform: scale(0.96);        /* 少し小さく */
   filter: brightness(0.95);      /* 少し暗く */
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【追加】上部タブメニュー */
+/* ホームは文字、他はPNGアイコンで表示する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.menu-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #555;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.menu-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.menu-text {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* 選択中のタブ */
+.menu-button.active {
+  background-color: #2ecc71;
+  color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* 押した瞬間のタップ感 */
+.menu-button:active {
+  transform: scale(0.95);
+}

@@ -115,6 +115,16 @@ function showSection(sectionId) {
   });
 
   document.getElementById(sectionId).classList.add("active");
+
+    const menuButtons = document.querySelectorAll(".menu-button");
+
+  menuButtons.forEach(button => {
+    button.classList.remove("active");
+  });
+
+  if (clickedButton) {
+    clickedButton.classList.add("active");
+  }
 }
 
 
