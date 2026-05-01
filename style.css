@@ -33,47 +33,57 @@ body {
 /* 【メニュー】 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【メニュー】 */
+/* 上部タブを小さくまとめ、アイコン＋文字で表示 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .menu {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: 3px;
+  margin-top: -6px;
+  margin-bottom: 10px;
 }
 
 .menu-button {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
+  min-height: 46px;
+  padding: 4px 2px;
+
+  border-radius: 9px;
+  border: 1px solid rgba(0,0,0,0.08);
 
   background-color: rgba(255,255,255,0.9);
   color: #555;
-  border: 1px solid rgba(0,0,0,0.08);
 
   cursor: pointer;
 }
 
 .menu-icon {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin-bottom: 2px;
 }
 
 .menu-text {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: bold;
+  line-height: 1;
+  white-space: nowrap;
 }
 
-/* 選択中 */
 .menu-button.active {
   background-color: #2ecc71;
   color: white;
   box-shadow: 0 3px 8px rgba(0,0,0,0.18);
 }
 
-/* タップ感 */
 .menu-button:active {
   transform: scale(0.95);
 }
