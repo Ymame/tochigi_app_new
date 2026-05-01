@@ -81,7 +81,7 @@ body {
 }
 
 .home-spacer {
-  height: clamp(380px, 60vw, 380px);
+  height: clamp(390px, 60vw, 390px);
 }
 
 .main-grid {
@@ -308,7 +308,7 @@ body {
   }
 
   .home-spacer {
-    height: clamp(380px, 100vw, 520px);
+    height: clamp(370px, 100vw, 510px);
   }
 
   .main-card {
