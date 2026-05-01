@@ -5,7 +5,22 @@
 body {
   margin: 0;
   font-family: sans-serif;
+
+  /* 背景画像 */
+  background-image: url("ichigo.png");
+
+  /* 画面いっぱい */
+  background-size: cover;
+
+  /* 中央配置 */
+  background-position: center;
+
+  /* スクロールしても固定 */
+  background-attachment: fixed;
+
+  /* 画像がないときの色 */
   background-color: #f4f6f8;
+
   color: #222;
 }
 
