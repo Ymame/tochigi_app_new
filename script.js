@@ -184,7 +184,8 @@ function createBusPlanObjects(routeName, directionName, departureTimes, arrivalT
       arrivalMinutes,
       durationMinutes,
       untilDepartureMinutes: departureMinutes - currentMinutes,
-      departureTimes
+      departureTimes,
+      timeMode
     });
   }
 
@@ -262,6 +263,15 @@ function createBusPlanHtml(plan) {
   const directionClass = getDirectionClassName(plan.directionName);
   const routeIcon = getRouteIcon(plan.routeName);
 
+  const countdownHtml = plan.timeMode === "now"
+    ? `
+      <div class="countdown-box">
+        <span class="countdown-label">出発まで</span>
+        <span class="countdown-value">${formatUntilDeparture(plan.untilDepartureMinutes)}</span>
+      </div>
+    `
+    : "";
+
   return `
     <div class="search-result-card ${routeClass}">
       <p class="route-title">
@@ -286,10 +296,7 @@ function createBusPlanHtml(plan) {
         </div>
       </div>
 
-      <div class="countdown-box">
-        <span class="countdown-label">出発まで</span>
-        <span class="countdown-value">${formatUntilDeparture(plan.untilDepartureMinutes)}</span>
-      </div>
+      ${countdownHtml}
 
       <p class="plan-info">所要時間：${plan.durationMinutes} 分</p>
 
