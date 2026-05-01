@@ -19,7 +19,6 @@
       <button class="menu-button" onclick="showSection('places')">📍</button>
     </nav>
 
-
     <section id="home" class="content-section active home-section">
 
       <div class="hero-card">
@@ -38,45 +37,55 @@
 
       </div>
 
-
       <div class="main-grid">
 
         <button class="main-card bus" onclick="showSection('bus')">
           <div class="icon">
             <img src="icons/bus.png" alt="バス">
           </div>
-          <div class="title">バス時刻表</div>
-          <div class="desc">次のバスを確認</div>
+
+          <div class="main-card-text">
+            <div class="title">バス時刻表</div>
+            <div class="desc">次のバスを確認</div>
+          </div>
         </button>
 
         <button class="main-card taxi" onclick="showSection('kurataku')">
           <div class="icon">
             <img src="icons/taxi.png" alt="タクシー">
           </div>
-          <div class="title">蔵タク</div>
-          <div class="desc">予約・電話</div>
+
+          <div class="main-card-text">
+            <div class="title">蔵タク</div>
+            <div class="desc">予約・電話</div>
+          </div>
         </button>
 
         <button class="main-card map" onclick="showSection('routeMap')">
           <div class="icon">
             <img src="icons/map.png" alt="路線図">
           </div>
-          <div class="title">路線図</div>
-          <div class="desc">全体を確認</div>
+
+          <div class="main-card-text">
+            <div class="title">路線図</div>
+            <div class="desc">全体を確認</div>
+          </div>
         </button>
 
         <button class="main-card place" onclick="showSection('places')">
           <div class="icon">
             <img src="icons/place.png" alt="場所">
           </div>
-          <div class="title">よく使う場所</div>
-          <div class="desc">地図を開く</div>
+
+          <div class="main-card-text">
+            <div class="title">よく使う場所</div>
+            <div class="desc">地図を開く</div>
+          </div>
         </button>
 
       </div>
 
     </section>
-
 
     <section id="bus" class="content-section">
       <h2>バス時刻表</h2>
@@ -117,7 +126,6 @@
       </div>
     </section>
 
-
     <section id="routeMap" class="content-section">
       <h2>全体路線図</h2>
       <p>栃木市の全体路線図を確認できます。</p>
@@ -135,7 +143,6 @@
         </a>
       </div>
     </section>
-
 
     <section id="kurataku" class="content-section">
       <h2>蔵タク</h2>
@@ -156,7 +163,6 @@
         </ul>
       </div>
     </section>
-
 
     <section id="places" class="content-section">
       <h2>よく使う場所</h2>
