@@ -194,7 +194,8 @@ function createBusPlanObjects(routeName, directionName, departureTimes, arrivalT
 function sortPlans(plans, sortType, timeMode, baseMinutes) {
   return plans.sort((a, b) => {
     if (timeMode === "arrival") {
-      return Math.abs(baseMinutes - a.arrivalMinutes) - Math.abs(baseMinutes - b.arrivalMinutes);
+      return Math.abs(baseMinutes - a.arrivalMinutes)
+           - Math.abs(baseMinutes - b.arrivalMinutes);
     }
 
     if (sortType === "duration") {
@@ -257,10 +258,18 @@ function renderSearchResults(resultArea, departure, arrival, plans, timeMode, ti
 
 function createBusPlanHtml(plan) {
   const guide = getDirectionGuide(plan.routeName, plan.directionName);
+  const routeClass = getRouteClassName(plan.routeName);
+  const directionClass = getDirectionClassName(plan.directionName);
+  const routeIcon = getRouteIcon(plan.routeName);
 
   return `
-    <div class="search-result-card route-${plan.routeName}">
-      <p><strong>${plan.routeName} / ${plan.directionName}</strong></p>
+    <div class="search-result-card ${routeClass}">
+      <p class="route-title">
+        <span class="route-icon">${routeIcon}</span>
+        <strong>${plan.routeName}</strong>
+        <span class="direction-badge ${directionClass}">${plan.directionName}</span>
+      </p>
+
       ${guide ? `<p>${guide}</p>` : ""}
 
       <p class="plan-main-time">
@@ -276,6 +285,42 @@ function createBusPlanHtml(plan) {
       </div>
     </div>
   `;
+}
+
+function getRouteClassName(routeName) {
+  if (routeName === "市街地北部循環線") {
+    return "route-north";
+  }
+
+  if (routeName === "市街地循環線") {
+    return "route-city";
+  }
+
+  return "route-other";
+}
+
+function getDirectionClassName(directionName) {
+  if (directionName === "東回り") {
+    return "direction-east";
+  }
+
+  if (directionName === "西回り") {
+    return "direction-west";
+  }
+
+  return "direction-other";
+}
+
+function getRouteIcon(routeName) {
+  if (routeName === "市街地北部循環線") {
+    return "🟢";
+  }
+
+  if (routeName === "市街地循環線") {
+    return "🔵";
+  }
+
+  return "🚌";
 }
 
 function timeToMinutes(timeStr) {

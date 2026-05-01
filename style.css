@@ -347,3 +347,58 @@ body {
 .route-北回り {
   border-left-color: #f39c12; /* オレンジ */
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【検索結果】路線別・方面別の強調表示 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.search-result-card {
+  border-left: 6px solid #ccc;
+}
+
+.search-result-card.route-north {
+  border-left-color: #168a45;
+  background: #eefaf2;
+}
+
+.search-result-card.route-city {
+  border-left-color: #1e88e5;
+  background: #eef6ff;
+}
+
+.search-result-card.route-other {
+  border-left-color: #999;
+}
+
+.route-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 8px 0;
+  flex-wrap: wrap;
+}
+
+.route-icon {
+  font-size: 18px;
+}
+
+.direction-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.direction-east {
+  background-color: #e67e22;
+}
+
+.direction-west {
+  background-color: #3498db;
+}
+
+.direction-other {
+  background-color: #777;
+}
