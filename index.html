@@ -97,6 +97,25 @@
           <option value="">読み込み中...</option>
         </select>
 
+        <div class="sort-options">
+          <p class="sort-title">並び順</p>
+
+          <label>
+            <input type="radio" name="sort-type" value="departure" checked>
+            出発時間順
+          </label>
+
+          <label>
+            <input type="radio" name="sort-type" value="arrival">
+            到着時間順
+          </label>
+
+          <label>
+            <input type="radio" name="sort-type" value="duration">
+            所要時間順
+          </label>
+        </div>
+
         <button class="search-button" onclick="searchRoute()">検索する</button>
 
         <div id="route-search-result" class="route-search-result">
@@ -113,8 +132,6 @@
           時刻表ページを開く
         </a>
       </div>
-
-
     </section>
 
     <section id="routeMap" class="content-section">
@@ -154,17 +171,29 @@
 
       <div class="place-card-item">
         <h3>栃木駅</h3>
-        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=栃木駅" target="_blank">地図を開く</a>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=栃木駅"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
 
       <div class="place-card-item">
         <h3>栃木市役所</h3>
-        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=栃木市役所" target="_blank">地図を開く</a>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
 
       <div class="place-card-item">
         <h3>イオン栃木店</h3>
-        <a class="link-button map-link" href="https://www.google.com/maps/search/?api=1&query=イオン栃木店" target="_blank">地図を開く</a>
+        <a class="link-button map-link"
+           href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
+           target="_blank">
+          地図を開く
+        </a>
       </div>
     </section>
 
