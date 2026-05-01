@@ -314,3 +314,48 @@ body {
 .main-card.taxi .arrow { color: #d93636; }
 .main-card.map .arrow { color: #1976d2; }
 .main-card.place .arrow { color: #e58a00; }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【調整】トップ上部カードをやさしい案内画像風にする */
+/* キャラクター・背景色・文字の雰囲気を整える */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.hero-card {
+  background:
+    linear-gradient(135deg, #fff8e7 0%, #fffdf5 55%, #e8f5e9 100%) !important;
+  border-radius: 18px !important;
+  padding: 18px 16px !important;
+  min-height: 150px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f1dfb8;
+}
+
+.hero-label {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.hero-title {
+  margin: 0 0 8px 0 !important;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #2f7d32;
+}
+
+.hero-desc {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #333;
+}
+
+.hero-img img {
+  width: 105px !important;
+  border-radius: 0;
+}
