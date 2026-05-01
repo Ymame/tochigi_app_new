@@ -207,6 +207,11 @@ function createNextBusHtml(routeName, directionName, timeArray) {
         <p><strong>${routeName} / ${directionName}</strong></p>
         ${guide ? `<p>${guide}</p>` : ""}
         <p>本日の運行は終了しました</p>
+
+        <div class="all-times-box">
+          <p class="all-times-title">全時刻</p>
+          <p class="all-times-list">${timeArray.join(" / ")}</p>
+        </div>
       </div>
     `;
   }
@@ -215,8 +220,13 @@ function createNextBusHtml(routeName, directionName, timeArray) {
     <div class="search-result-card ${directionClass}">
       <p><strong>${routeName} / ${directionName}</strong></p>
       ${guide ? `<p>${guide}</p>` : ""}
-      <p style="font-size:20px; font-weight:bold;">${nextBus.nextTime}</p>
+      <p style="font-size:20px; font-weight:bold;">次のバス：${nextBus.nextTime}</p>
       <p>あと ${nextBus.diffMinutes} 分</p>
+
+      <div class="all-times-box">
+        <p class="all-times-title">全時刻</p>
+        <p class="all-times-list">${timeArray.join(" / ")}</p>
+      </div>
     </div>
   `;
 }
