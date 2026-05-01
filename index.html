@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
   <div class="app">
 
     <nav class="menu">
@@ -41,7 +40,6 @@
       <div class="home-spacer"></div>
 
       <div class="main-grid">
-
         <button class="main-card bus" onclick="showSection('bus')">
           <div class="icon"><img src="icons/bus.png" alt="バス"></div>
           <div class="main-card-text">
@@ -64,7 +62,7 @@
           <div class="icon"><img src="icons/map.png" alt="路線図"></div>
           <div class="main-card-text">
             <div class="title">路線図</div>
-            <div class="desc">路線図を確認（PDFもこちらから）</div>
+            <div class="desc">路線図を確認</div>
           </div>
           <div class="arrow">›</div>
         </button>
@@ -77,7 +75,6 @@
           </div>
           <div class="arrow">›</div>
         </button>
-
       </div>
     </section>
 
@@ -98,6 +95,27 @@
         </select>
 
         <div class="sort-options">
+          <p class="sort-title">検索条件</p>
+
+          <label>
+            <input type="radio" name="time-mode" value="now" checked onchange="changeTimeMode()">
+            現在時刻から探す
+          </label>
+
+          <label>
+            <input type="radio" name="time-mode" value="departure" onchange="changeTimeMode()">
+            出発時間を指定
+          </label>
+
+          <label>
+            <input type="radio" name="time-mode" value="arrival" onchange="changeTimeMode()">
+            到着時間を指定
+          </label>
+
+          <input id="time-input" class="time-input hidden" type="time">
+        </div>
+
+        <div class="sort-options">
           <p class="sort-title">並び順</p>
 
           <label>
@@ -115,6 +133,11 @@
             所要時間順
           </label>
         </div>
+
+        <label class="show-all-label">
+          <input id="show-all-results" type="checkbox" onchange="searchRoute()">
+          すべて表示する
+        </label>
 
         <button class="search-button" onclick="searchRoute()">検索する</button>
 

@@ -11,10 +11,6 @@ body {
   margin: 0 auto;
   padding: 16px;
   box-sizing: border-box;
-  background-image: url("ichigo.png");
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
 }
 
 .menu {
@@ -77,7 +73,10 @@ body {
 }
 
 #home {
-  background: transparent;
+  background-image: url("ichigo.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
   padding: 0;
 }
 
@@ -89,6 +88,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  padding: 0;
 }
 
 .main-card {
@@ -190,13 +190,18 @@ body {
 }
 
 .stop-search,
-.route-select {
+.route-select,
+.time-input {
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
   margin: 6px 0 12px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.hidden {
+  display: none;
 }
 
 .search-button {
@@ -225,6 +230,16 @@ body {
   font-size: 14px;
 }
 
+.show-all-label {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
 .route-search-result {
   margin-top: 12px;
   padding: 10px;
@@ -241,11 +256,6 @@ body {
   border: 1px solid #b8d8ff;
 }
 
-.search-result-card.finished {
-  background: #f5f5f5;
-  border-color: #ddd;
-}
-
 .plan-main-time {
   font-size: 20px;
   font-weight: bold;
@@ -254,6 +264,11 @@ body {
 
 .plan-info {
   margin: 4px 0;
+}
+
+.result-note {
+  font-size: 13px;
+  color: #666;
 }
 
 .all-times-box {
