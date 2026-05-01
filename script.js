@@ -194,7 +194,7 @@ function createBusPlanObjects(routeName, directionName, departureTimes, arrivalT
 function sortPlans(plans, sortType, timeMode, baseMinutes) {
   return plans.sort((a, b) => {
     if (timeMode === "arrival") {
-      return b.arrivalMinutes - a.arrivalMinutes;
+      return Math.abs(baseMinutes - a.arrivalMinutes) - Math.abs(baseMinutes - b.arrivalMinutes);
     }
 
     if (sortType === "duration") {
