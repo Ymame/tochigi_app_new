@@ -101,7 +101,7 @@ body {
   border-radius: 14px;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .main-card .icon {
@@ -208,6 +208,15 @@ body {
   width: 100%;
   background-color: #168a45;
   font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.15s ease;
+}
+
+.search-button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  filter: brightness(0.9);
+  background-color: #0f6f35;
 }
 
 .sort-options {
@@ -254,12 +263,131 @@ body {
   border-radius: 8px;
   background: #eef8ff;
   border: 1px solid #b8d8ff;
+  border-left: 6px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.plan-main-time {
-  font-size: 20px;
+.search-result-card.route-north {
+  border-left-color: #168a45;
+  background: #eefaf2;
+}
+
+.search-result-card.route-city {
+  border-left-color: #1e88e5;
+  background: #eef6ff;
+}
+
+.search-result-card.route-other {
+  border-left-color: #999;
+}
+
+.route-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 8px 0;
+  flex-wrap: wrap;
+}
+
+.route-icon {
+  font-size: 18px;
+}
+
+.route-guide {
+  margin: 6px 0 10px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.direction-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
   font-weight: bold;
-  margin: 8px 0 4px 0;
+  color: white;
+}
+
+.direction-east {
+  background-color: #e67e22;
+}
+
+.direction-west {
+  background-color: #3498db;
+}
+
+.direction-other {
+  background-color: #777;
+}
+
+.time-display-box {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.9);
+}
+
+.time-item {
+  text-align: center;
+}
+
+.time-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+}
+
+.time-value {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.departure-time .time-value {
+  color: #168a45;
+}
+
+.arrival-time .time-value {
+  color: #e74c3c;
+}
+
+.time-arrow {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #555;
+}
+
+.countdown-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: #fff4d6;
+  border: 1px solid #ffd36a;
+}
+
+.countdown-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #8a5a00;
+}
+
+.countdown-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #d35400;
 }
 
 .plan-info {
@@ -319,86 +447,8 @@ body {
     width: 44px;
     height: 44px;
   }
-}
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【路線別カラー】 */
-/* 路線ごとに枠色を変える */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.search-result-card {
-  border-left: 6px solid #ccc;
-  background: linear-gradient(to right, rgba(0,0,0,0.03), #fff);
-}
-
-/* 例：路線ごとの色（仮） */
-.route-東回り {
-  border-left-color: #e74c3c; /* 赤 */
-}
-
-.route-西回り {
-  border-left-color: #3498db; /* 青 */
-}
-
-.route-南回り {
-  border-left-color: #2ecc71; /* 緑 */
-}
-
-.route-北回り {
-  border-left-color: #f39c12; /* オレンジ */
-}
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【検索結果】路線別・方面別の強調表示 */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.search-result-card {
-  border-left: 6px solid #ccc;
-}
-
-.search-result-card.route-north {
-  border-left-color: #168a45;
-  background: #eefaf2;
-}
-
-.search-result-card.route-city {
-  border-left-color: #1e88e5;
-  background: #eef6ff;
-}
-
-.search-result-card.route-other {
-  border-left-color: #999;
-}
-
-.route-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 8px 0;
-  flex-wrap: wrap;
-}
-
-.route-icon {
-  font-size: 18px;
-}
-
-.direction-badge {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-}
-
-.direction-east {
-  background-color: #e67e22;
-}
-
-.direction-west {
-  background-color: #3498db;
-}
-
-.direction-other {
-  background-color: #777;
+  .time-value {
+    font-size: 24px;
+  }
 }

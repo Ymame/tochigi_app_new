@@ -270,14 +270,28 @@ function createBusPlanHtml(plan) {
         <span class="direction-badge ${directionClass}">${plan.directionName}</span>
       </p>
 
-      ${guide ? `<p>${guide}</p>` : ""}
+      ${guide ? `<p class="route-guide">${guide}</p>` : ""}
 
-      <p class="plan-main-time">
-        出発 ${plan.departureTime} → 到着 ${plan.arrivalTime}
-      </p>
+      <div class="time-display-box">
+        <div class="time-item departure-time">
+          <span class="time-label">出発</span>
+          <span class="time-value">${plan.departureTime}</span>
+        </div>
+
+        <div class="time-arrow">→</div>
+
+        <div class="time-item arrival-time">
+          <span class="time-label">到着</span>
+          <span class="time-value">${plan.arrivalTime}</span>
+        </div>
+      </div>
+
+      <div class="countdown-box">
+        <span class="countdown-label">出発まで</span>
+        <span class="countdown-value">${formatUntilDeparture(plan.untilDepartureMinutes)}</span>
+      </div>
 
       <p class="plan-info">所要時間：${plan.durationMinutes} 分</p>
-      <p class="plan-info">出発まで：${formatUntilDeparture(plan.untilDepartureMinutes)}</p>
 
       <div class="all-times-box">
         <p class="all-times-title">出発地の全時刻</p>
