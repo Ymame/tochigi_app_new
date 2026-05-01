@@ -1,5 +1,16 @@
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】共通データ */
+/* timetable.json から読み込んだデータを入れる */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 let timetable = {};
 let routeGuides = {};
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】画面切り替え */
+/* 上部タブと表示画面を切り替える */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function showSection(sectionId, clickedButton) {
   const sections = document.querySelectorAll(".content-section");
@@ -27,6 +38,12 @@ function showSection(sectionId, clickedButton) {
   }
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】時刻表データ読み込み */
+/* timetable.json を読み込み、選択欄を作る */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 async function loadTimetable() {
   try {
     const response = await fetch("timetable.json");
@@ -48,6 +65,12 @@ async function loadTimetable() {
   }
 }
 
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】出発地・到着地セレクト生成 */
+/* 停留所一覧をselectに入れる */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 function renderRouteSelects() {
   const departureSelect = document.getElementById("departure-select");
   const arrivalSelect = document.getElementById("arrival-select");
@@ -65,32 +88,19 @@ function renderRouteSelects() {
   arrivalSelect.innerHTML = optionsHtml;
 }
 
-function changeTimeMode() {
-  const timeMode = getCheckedRadioValue("time-mode", "now");
-  const timeInput = document.getElementById("time-input");
 
-  if (timeMode === "now") {
-    timeInput.classList.add("hidden");
-    timeInput.value = "";
-    return;
-  }
-
-  timeInput.classList.remove("hidden");
-
-  if (!timeInput.value) {
-    timeInput.value = getCurrentTimeText();
-  }
-}
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】ルート検索 */
+/* 出発地・到着地・並び順をもとに検索する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function searchRoute() {
   const departure = document.getElementById("departure-select").value;
   const arrival = document.getElementById("arrival-select").value;
   const resultArea = document.getElementById("route-search-result");
 
-  const timeMode = getCheckedRadioValue("time-mode", "now");
-  const sortType = getCheckedRadioValue("sort-type", "departure");
-  const timeInputValue = document.getElementById("time-input").value;
-  const showAllResults = document.getElementById("show-all-results").checked;
+  const checkedSort = document.querySelector('input[name="sort-type"]:checked');
+  const sortType = checkedSort ? checkedSort.value : "departure";
 
   if (!departure || !arrival) {
     resultArea.innerHTML = `<p>出発地と到着地を両方選んでください。</p>`;
@@ -102,11 +112,6 @@ function searchRoute() {
     return;
   }
 
-  if (timeMode !== "now" && !timeInputValue) {
-    resultArea.innerHTML = `<p>時間を指定してください。</p>`;
-    return;
-  }
-
   const departureData = timetable[departure];
   const arrivalData = timetable[arrival];
 
@@ -114,8 +119,6 @@ function searchRoute() {
     resultArea.innerHTML = `<p>検索に必要な時刻表データがありません。</p>`;
     return;
   }
-
-  const baseMinutes = getBaseMinutes(timeMode, timeInputValue);
 
   let plans = [];
 
@@ -133,29 +136,44 @@ function searchRoute() {
           routeName,
           directionName,
           departureTimes,
-          arrivalTimes,
-          baseMinutes,
-          timeMode
+          arrivalTimes
         )
       );
     }
   }
 
-  plans = sortPlans(plans, sortType, timeMode, baseMinutes);
+  plans = sortPlans(plans, sortType);
 
-  renderSearchResults(
-    resultArea,
-    departure,
-    arrival,
-    plans,
-    timeMode,
-    timeInputValue,
-    sortType,
-    showAllResults
-  );
+  let html = `
+    <h4>検索結果</h4>
+    <p><strong>${departure}</strong> から <strong>${arrival}</strong></p>
+    <p class="current-time">現在時刻：${getCurrentTimeText()}</p>
+  `;
+
+  if (plans.length === 0) {
+    html += `
+      <p>同じ路線・同じ方面で到着時刻を計算できる候補がありません。</p>
+      <p style="font-size:12px; color:#666;">
+        ※今後、乗換や別方面の判定を追加できます。
+      </p>
+    `;
+
+    resultArea.innerHTML = html;
+    return;
+  }
+
+  html += plans.map(plan => createBusPlanHtml(plan)).join("");
+
+  resultArea.innerHTML = html;
 }
 
-function createBusPlanObjects(routeName, directionName, departureTimes, arrivalTimes, baseMinutes, timeMode) {
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】検索結果データ作成 */
+/* 表示前に、計算しやすい形のデータへ変換する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+function createBusPlanObjects(routeName, directionName, departureTimes, arrivalTimes) {
   const plans = [];
   const currentMinutes = getCurrentMinutes();
 
@@ -163,17 +181,16 @@ function createBusPlanObjects(routeName, directionName, departureTimes, arrivalT
     const departureTime = departureTimes[i];
     const arrivalTime = arrivalTimes[i];
 
-    if (!departureTime || !arrivalTime) continue;
+    if (!arrivalTime) continue;
 
     const departureMinutes = timeToMinutes(departureTime);
     const arrivalMinutes = timeToMinutes(arrivalTime);
+
+    if (departureMinutes < currentMinutes) continue;
+
     const durationMinutes = arrivalMinutes - departureMinutes;
 
     if (durationMinutes < 0) continue;
-
-    if (timeMode === "now" && departureMinutes < baseMinutes) continue;
-    if (timeMode === "departure" && departureMinutes < baseMinutes) continue;
-    if (timeMode === "arrival" && arrivalMinutes > baseMinutes) continue;
 
     plans.push({
       routeName,
@@ -191,12 +208,14 @@ function createBusPlanObjects(routeName, directionName, departureTimes, arrivalT
   return plans;
 }
 
-function sortPlans(plans, sortType, timeMode, baseMinutes) {
-  return plans.sort((a, b) => {
-    if (timeMode === "arrival") {
-      return b.arrivalMinutes - a.arrivalMinutes;
-    }
 
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】検索結果の並び替え */
+/* 所要時間・出発時間・到着時間で並び替える */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+function sortPlans(plans, sortType) {
+  return plans.sort((a, b) => {
     if (sortType === "duration") {
       return a.durationMinutes - b.durationMinutes;
     }
@@ -209,51 +228,11 @@ function sortPlans(plans, sortType, timeMode, baseMinutes) {
   });
 }
 
-function renderSearchResults(resultArea, departure, arrival, plans, timeMode, timeInputValue, sortType, showAllResults) {
-  let conditionText = "現在時刻から探す";
 
-  if (timeMode === "departure") {
-    conditionText = `${timeInputValue} 以降に出発`;
-  }
-
-  if (timeMode === "arrival") {
-    conditionText = `${timeInputValue} までに到着`;
-  }
-
-  let html = `
-    <h4>検索結果</h4>
-    <p><strong>${departure}</strong> から <strong>${arrival}</strong></p>
-    <p class="current-time">現在時刻：${getCurrentTimeText()}</p>
-    <p class="result-note">検索条件：${conditionText}</p>
-    <p class="result-note">並び順：${getSortLabel(sortType, timeMode)}</p>
-  `;
-
-  if (plans.length === 0) {
-    html += `
-      <p>条件に合うバスが見つかりませんでした。</p>
-      <p style="font-size:12px; color:#666;">
-        時間・出発地・到着地を変えて検索してください。
-      </p>
-    `;
-
-    resultArea.innerHTML = html;
-    return;
-  }
-
-  const displayPlans = showAllResults ? plans : plans.slice(0, 1);
-
-  html += displayPlans.map(plan => createBusPlanHtml(plan)).join("");
-
-  if (!showAllResults && plans.length > 1) {
-    html += `
-      <p class="result-note">
-        他にも ${plans.length - 1} 件あります。必要な場合は「すべて表示する」にチェックしてください。
-      </p>
-    `;
-  }
-
-  resultArea.innerHTML = html;
-}
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】検索結果HTML作成 */
+/* 1件分の検索結果カードを作る */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function createBusPlanHtml(plan) {
   const guide = getDirectionGuide(plan.routeName, plan.directionName);
@@ -268,7 +247,7 @@ function createBusPlanHtml(plan) {
       </p>
 
       <p class="plan-info">所要時間：${plan.durationMinutes} 分</p>
-      <p class="plan-info">出発まで：${formatUntilDeparture(plan.untilDepartureMinutes)}</p>
+      <p class="plan-info">出発まで：${plan.untilDepartureMinutes} 分</p>
 
       <div class="all-times-box">
         <p class="all-times-title">出発地の全時刻</p>
@@ -277,6 +256,12 @@ function createBusPlanHtml(plan) {
     </div>
   `;
 }
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】時刻計算 */
+/* "7:20" を分に変換して計算する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function timeToMinutes(timeStr) {
   const [hour, minute] = timeStr.split(":").map(Number);
@@ -295,13 +280,11 @@ function getCurrentTimeText() {
   return `${hour}:${minute}`;
 }
 
-function getBaseMinutes(timeMode, timeInputValue) {
-  if (timeMode === "now") {
-    return getCurrentMinutes();
-  }
 
-  return timeToMinutes(timeInputValue);
-}
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】方面補足 */
+/* timetable.json の routeGuides から説明を取る */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 function getDirectionGuide(routeName, directionName) {
   if (routeGuides[routeName] && routeGuides[routeName][directionName]) {
@@ -311,42 +294,10 @@ function getDirectionGuide(routeName, directionName) {
   return "";
 }
 
-function getCheckedRadioValue(name, defaultValue) {
-  const checked = document.querySelector(`input[name="${name}"]:checked`);
 
-  if (!checked) {
-    return defaultValue;
-  }
-
-  return checked.value;
-}
-
-function getSortLabel(sortType, timeMode) {
-  if (timeMode === "arrival") {
-    return "指定した到着時間に近い順";
-  }
-
-  if (sortType === "duration") {
-    return "所要時間順";
-  }
-
-  if (sortType === "arrival") {
-    return "到着時間順";
-  }
-
-  return "出発時間順";
-}
-
-function formatUntilDeparture(minutes) {
-  if (minutes < 0) {
-    return "現在時刻より前";
-  }
-
-  if (minutes === 0) {
-    return "まもなく";
-  }
-
-  return `${minutes} 分`;
-}
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】初期実行 */
+/* ページを開いたときに時刻表を読む */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 loadTimetable();
