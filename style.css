@@ -81,14 +81,14 @@ body {
 }
 
 .home-spacer {
-  height: clamp(280px, 75vw, 380px);
+  height: clamp(320px, 80vw, 420px);
 }
 
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  padding: 0;
+  padding: 0 10px;
 }
 
 .main-card {
