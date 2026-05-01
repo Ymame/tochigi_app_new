@@ -5,27 +5,29 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background-color: #f4f6f8; /* ← シンプルに戻す */
+  background-color: #f4f6f8;
   color: #222;
 }
 
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* アプリ全体 */
+/* 背景画像は app の中だけに表示する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
 .app {
   max-width: 480px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 16px;
+  box-sizing: border-box;
 
-  /* ↓ここから追加 */
   background-image: url("ichigo.png");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
 
-  /* 角丸（スマホっぽく） */
   border-radius: 20px;
-
-  /* 少し影（浮かせる） */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
@@ -46,17 +48,19 @@ body {
   border-radius: 10px;
   background-color: #1f6feb;
   color: white;
+  cursor: pointer;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* セクション */
+/* セクション共通 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .content-section {
   display: none;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 14px;
   padding: 16px;
+  box-sizing: border-box;
 }
 
 .content-section.active {
@@ -64,59 +68,53 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* ヒーロー */
+/* トップ画面 */
+/* 背景画像を見せるため、白背景を消す */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.hero-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #e8f0fe;
-  border-radius: 12px;
-  padding: 12px;
+#home {
+  background: transparent;
+  padding: 0;
 }
 
-.hero-title {
-  margin: 4px 0;
-}
-
-.hero-img img {
-  width: 80px;
+.home-spacer {
+  height: 310px;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* メインカードグリッド */
+/* トップカード配置 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-top: 16px;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* メインカード（重要） */
+/* トップカード本体 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .main-card {
-  display: flex !important;        /* ←最重要 */
-  flex-direction: row !important;  /* 横並び強制 */
+  display: grid;
+  grid-template-columns: 52px 1fr 16px;
   align-items: center;
-  gap: 10px;
+  column-gap: 8px;
 
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-
-  color: white;
+  min-height: 94px;
+  padding: 10px;
+  border-radius: 14px;
   text-align: left;
   cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* アイコン */
 .main-card .icon {
-  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-card .icon img {
@@ -128,45 +126,76 @@ body {
 .main-card-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-/* タイトル */
 .title {
   font-size: 16px;
   font-weight: bold;
+  margin-bottom: 4px;
 }
 
-/* 説明 */
 .desc {
-  font-size: 13px;
-  opacity: 0.9;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #333;
 }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 矢印 */
+.arrow {
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 1;
+  justify-self: end;
+}
+
 /* 色分け */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.bus {
-  background-color: #2ecc71;
+.main-card.bus {
+  background-color: rgba(234, 248, 239, 0.92);
+  border: 2px solid #168a45;
+  color: #168a45;
 }
 
-.taxi {
-  background-color: #e74c3c;
+.main-card.taxi {
+  background-color: rgba(255, 241, 241, 0.92);
+  border: 2px solid #e24a4a;
+  color: #d93636;
 }
 
-.map {
-  background-color: #3498db;
+.main-card.map {
+  background-color: rgba(237, 246, 255, 0.92);
+  border: 2px solid #1e88e5;
+  color: #1976d2;
 }
 
-.place {
-  background-color: #f39c12;
+.main-card.place {
+  background-color: rgba(255, 247, 230, 0.92);
+  border: 2px solid #f39c12;
+  color: #e58a00;
+}
+
+.main-card.bus .arrow {
+  color: #168a45;
+}
+
+.main-card.taxi .arrow {
+  color: #d93636;
+}
+
+.main-card.map .arrow {
+  color: #1976d2;
+}
+
+.main-card.place .arrow {
+  color: #e58a00;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 /* 通常カード */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.card {
+.card,
+.place-card-item {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 12px;
@@ -175,7 +204,7 @@ body {
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* ボタン */
+/* リンクボタン */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .link-button {
@@ -192,12 +221,17 @@ body {
   background-color: #6f42c1;
 }
 
+.map-link {
+  background-color: #1f6feb;
+}
+
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 入力 */
+/* 入力欄 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .stop-search {
   width: 100%;
+  box-sizing: border-box;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -220,155 +254,60 @@ body {
   border-radius: 8px;
   background: orange;
   color: white;
+  cursor: pointer;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【最終上書き】トップカードを確実に横並びにする */
-/* アイコンを左、文字を右に配置する */
+/* 路線図画像 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.main-grid .main-card {
-  display: grid !important;
-  grid-template-columns: 64px 1fr !important;
-  align-items: center !important;
-  column-gap: 10px !important;
-
-  text-align: left !important;
-}
-
-/* アイコンを左列に固定 */
-.main-grid .main-card .icon {
-  grid-column: 1 !important;
-  width: 64px !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* アイコン画像サイズ */
-.main-grid .main-card .icon img {
-  width: 52px !important;
-  height: 52px !important;
-}
-
-/* 文字を右列に固定 */
-.main-grid .main-card .main-card-text {
-  grid-column: 2 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
+.route-map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【修正】トップカード色を薄い背景＋濃い枠線に戻す */
-/* ゴール画像のような淡いカードUIにする */
+/* スマホ調整 */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.main-card.bus {
-  background-color: #eaf8ef !important;
-  border: 2px solid #168a45 !important;
-  color: #168a45 !important;
-}
+@media (max-width: 480px) {
+  .app {
+    border-radius: 0;
+    padding: 14px;
+  }
 
-.main-card.taxi {
-  background-color: #fff1f1 !important;
-  border: 2px solid #e24a4a !important;
-  color: #d93636 !important;
-}
+  .home-spacer {
+    height: 305px;
+  }
 
-.main-card.map {
-  background-color: #edf6ff !important;
-  border: 2px solid #1e88e5 !important;
-  color: #1976d2 !important;
-}
+  .main-grid {
+    gap: 10px;
+  }
 
-.main-card.place {
-  background-color: #fff7e6 !important;
-  border: 2px solid #f39c12 !important;
-  color: #e58a00 !important;
-}
+  .main-card {
+    grid-template-columns: 48px 1fr 14px;
+    min-height: 88px;
+    padding: 9px;
+  }
 
-.main-card .desc {
-  color: #333 !important;
-  opacity: 1 !important;
-}
+  .main-card .icon img {
+    width: 44px;
+    height: 44px;
+  }
 
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【追加】トップカード右端の矢印 */
-/* 押すと次の画面へ進むことを分かりやすくする */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+  .title {
+    font-size: 15px;
+  }
 
-.main-grid .main-card {
-  grid-template-columns: 56px 1fr 18px !important;
-}
+  .desc {
+    font-size: 11px;
+  }
 
-.main-card .arrow {
-  grid-column: 3;
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 1;
-  justify-self: end;
-  align-self: center;
-}
-
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【調整】矢印の見た目をアプリ風にする */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.main-card .arrow {
-  font-size: 22px;      /* 少し小さく */
-  font-weight: normal;  /* 太さを落とす */
-  color: #999;          /* グレーで控えめに */
-}
-
-/* 各色に少し合わせる（自然に見える） */
-.main-card.bus .arrow { color: #168a45; }
-.main-card.taxi .arrow { color: #d93636; }
-.main-card.map .arrow { color: #1976d2; }
-.main-card.place .arrow { color: #e58a00; }
-
-
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-/* 【調整】トップ上部カードをやさしい案内画像風にする */
-/* キャラクター・背景色・文字の雰囲気を整える */
-/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-
-.hero-card {
-  background:
-    linear-gradient(135deg, #fff8e7 0%, #fffdf5 55%, #e8f5e9 100%) !important;
-  border-radius: 18px !important;
-  padding: 18px 16px !important;
-  min-height: 150px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #f1dfb8;
-}
-
-.hero-label {
-  margin: 0 0 8px 0;
-  font-size: 15px;
-  font-weight: bold;
-  color: #333;
-}
-
-.hero-title {
-  margin: 0 0 8px 0 !important;
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  color: #2f7d32;
-}
-
-.hero-desc {
-  margin: 0;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1.5;
-  color: #333;
-}
-
-.hero-img img {
-  width: 105px !important;
-  border-radius: 0;
+  .stop-buttons {
+    grid-template-columns: 1fr;
+  }
 }

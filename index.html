@@ -21,21 +21,7 @@
 
     <section id="home" class="content-section active home-section">
 
-      <div class="hero-card">
-
-        <div class="hero-text">
-          <p class="hero-label">栃木市の移動サポート</p>
-          <h2 class="hero-title">とち介ナビ</h2>
-          <p class="hero-desc">
-            バス・蔵タク・地図をすぐ確認できます。
-          </p>
-        </div>
-
-        <div class="hero-img">
-          <img src="tochisuke.jpg" alt="とち介">
-        </div>
-
-      </div>
+      <div class="home-spacer"></div>
 
       <div class="main-grid">
 
@@ -43,21 +29,17 @@
           <div class="icon">
             <img src="icons/bus.png" alt="バス">
           </div>
-
           <div class="main-card-text">
             <div class="title">バス時刻表</div>
             <div class="desc">時刻表の確認や次のバスをチェック</div>
           </div>
-
           <div class="arrow">›</div>
-          
         </button>
 
         <button class="main-card taxi" onclick="showSection('kurataku')">
           <div class="icon">
             <img src="icons/taxi.png" alt="タクシー">
           </div>
-
           <div class="main-card-text">
             <div class="title">蔵タク</div>
             <div class="desc">電話予約はこちらから</div>
@@ -69,10 +51,9 @@
           <div class="icon">
             <img src="icons/map.png" alt="路線図">
           </div>
-
           <div class="main-card-text">
             <div class="title">路線図</div>
-            <div class="desc">路線図を確認(PDFもこちらから)</div>
+            <div class="desc">路線図を確認（PDFもこちらから）</div>
           </div>
           <div class="arrow">›</div>
         </button>
@@ -81,7 +62,6 @@
           <div class="icon">
             <img src="icons/place.png" alt="場所">
           </div>
-
           <div class="main-card-text">
             <div class="title">よく使う場所</div>
             <div class="desc">地図で場所を確認</div>
@@ -100,19 +80,15 @@
       <div class="card">
         <h3>栃木市公式 時刻表ページ</h3>
         <p>公式の時刻表案内ページを開きます。</p>
-
-        <a
-          class="link-button timetable-link"
-          href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
-          target="_blank"
-        >
+        <a class="link-button timetable-link"
+           href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
+           target="_blank">
           時刻表ページを開く
         </a>
       </div>
 
       <div class="card">
         <h3>停留所を選択</h3>
-
         <input
           id="stop-search"
           class="stop-search"
@@ -120,7 +96,6 @@
           placeholder="停留所名で検索"
           oninput="renderStopButtons()"
         >
-
         <div id="stop-buttons" class="stop-buttons">
           <p>時刻表データを読み込み中です。</p>
         </div>
@@ -139,13 +114,8 @@
       <div class="card">
         <h3>路線図画像</h3>
         <p>画像をタップすると拡大表示しやすくなります。</p>
-
         <a href="route_map.png" target="_blank">
-          <img
-            src="route_map.png"
-            alt="栃木市 全体路線図"
-            class="route-map-image"
-          >
+          <img src="route_map.png" alt="栃木市 全体路線図" class="route-map-image">
         </a>
       </div>
     </section>
@@ -177,33 +147,27 @@
 
         <div class="place-card-item">
           <h3>栃木駅</h3>
-          <a
-            class="link-button map-link"
-            href="https://www.google.com/maps/search/?api=1&query=栃木駅"
-            target="_blank"
-          >
+          <a class="link-button map-link"
+             href="https://www.google.com/maps/search/?api=1&query=栃木駅"
+             target="_blank">
             地図を開く
           </a>
         </div>
 
         <div class="place-card-item">
           <h3>栃木市役所</h3>
-          <a
-            class="link-button map-link"
-            href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
-            target="_blank"
-          >
+          <a class="link-button map-link"
+             href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
+             target="_blank">
             地図を開く
           </a>
         </div>
 
         <div class="place-card-item">
           <h3>イオン栃木店</h3>
-          <a
-            class="link-button map-link"
-            href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
-            target="_blank"
-          >
+          <a class="link-button map-link"
+             href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
+             target="_blank">
             地図を開く
           </a>
         </div>
