@@ -328,6 +328,7 @@ body {
 
 .search-result-card {
   border-left: 6px solid #ccc;
+  background: linear-gradient(to right, rgba(0,0,0,0.03), #fff);
 }
 
 /* 例：路線ごとの色（仮） */
