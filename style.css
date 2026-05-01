@@ -5,22 +5,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
-
-  /* 背景画像 */
-  background-image: url("ichigo.png");
-
-  /* 画面いっぱい */
-  background-size: cover;
-
-  /* 中央配置 */
-  background-position: center;
-
-  /* スクロールしても固定 */
-  background-attachment: fixed;
-
-  /* 画像がないときの色 */
-  background-color: #f4f6f8;
-
+  background-color: #f4f6f8; /* ← シンプルに戻す */
   color: #222;
 }
 
@@ -28,6 +13,19 @@ body {
   max-width: 480px;
   margin: 0 auto;
   padding: 16px;
+
+  /* ↓ここから追加 */
+  background-image: url("ichigo.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  /* 角丸（スマホっぽく） */
+  border-radius: 20px;
+
+  /* 少し影（浮かせる） */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
 }
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
