@@ -101,7 +101,7 @@ body {
   border-radius: 14px;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
 .main-card .icon {
@@ -319,4 +319,30 @@ body {
     width: 44px;
     height: 44px;
   }
+}
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【路線別カラー】 */
+/* 路線ごとに枠色を変える */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.search-result-card {
+  border-left: 6px solid #ccc;
+}
+
+/* 例：路線ごとの色（仮） */
+.route-東回り {
+  border-left-color: #e74c3c; /* 赤 */
+}
+
+.route-西回り {
+  border-left-color: #3498db; /* 青 */
+}
+
+.route-南回り {
+  border-left-color: #2ecc71; /* 緑 */
+}
+
+.route-北回り {
+  border-left-color: #f39c12; /* オレンジ */
 }

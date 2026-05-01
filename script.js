@@ -259,7 +259,7 @@ function createBusPlanHtml(plan) {
   const guide = getDirectionGuide(plan.routeName, plan.directionName);
 
   return `
-    <div class="search-result-card">
+    <div class="search-result-card route-${plan.routeName}">
       <p><strong>${plan.routeName} / ${plan.directionName}</strong></p>
       ${guide ? `<p>${guide}</p>` : ""}
 
