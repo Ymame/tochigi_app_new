@@ -592,3 +592,29 @@ li {
   transform: scale(1.35);
   transform-origin: center;
 }
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【追加】トップカードを横並びにする */
+/* アイコンを左、文字を右に並べる */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.main-card {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 10px;
+}
+
+.main-card .icon {
+  flex-shrink: 0;
+}
+
+.main-card .icon img {
+  width: 52px;
+  height: 52px;
+}
+
+.main-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
