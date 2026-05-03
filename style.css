@@ -1,456 +1,777 @@
+/*
+  style.css は、index.html の見た目を整えるためのファイルです。
+  HTMLが「何を置くか」を決め、CSSが「どう見せるか」を決めます。
+
+  CSSの基本:
+  - セレクタ: どのHTML要素にデザインを当てるかを指定します。例: body, .app, #home
+  - プロパティ: 何を変えるかを指定します。例: color, padding, display
+  - 値: どのように変えるかを指定します。例: red, 16px, grid
+  - .xxx: class属性に付けた名前を指定します。例: class="menu" は .menu
+  - #xxx: id属性に付けた名前を指定します。例: id="home" は #home
+  - :active: ボタンを押している瞬間など、状態に合わせた見た目を指定します。
+  - @media: 画面幅などの条件に合わせて、別のCSSを当てます。
+*/
+
+/* ページ全体の基本設定です。すべての画面に共通する土台を作ります。 */
 body {
+  /* ブラウザが最初から持っている外側の余白を消します。 */
   margin: 0;
+  /* ページ全体の文字を、読みやすい標準的なゴシック体にします。 */
   font-family: sans-serif;
+  /* アプリ外側の背景色を薄いグレーにします。 */
   background-color: #f4f6f8;
+  /* 基本の文字色を濃いグレーにします。 */
   color: #222;
 }
 
+/* アプリ全体を包む枠です。スマートフォン画面を意識した幅にしています。 */
 .app {
+  /* アプリの横幅が広がりすぎないよう、最大幅を480pxにします。 */
   max-width: 480px;
+  /* 画面の高さぶんは最低限確保します。 */
   min-height: 100vh;
+  /* 左右の余白をautoにして、アプリを中央寄せにします。 */
   margin: 0 auto;
+  /* 内側に16pxの余白を作り、画面端に内容がくっつかないようにします。 */
   padding: 16px;
+  /* paddingやborderを含めて幅を計算するようにします。 */
   box-sizing: border-box;
 }
 
+/* 画面上部の5つのメニューを並べるエリアです。 */
 .menu {
+  /* gridを使って、メニューボタンを横並びにします。 */
   display: grid;
+  /* 5つの列を同じ幅で作ります。 */
   grid-template-columns: repeat(5, 1fr);
+  /* ボタン同士のすき間を少しだけ空けます。 */
   gap: 3px;
+  /* 上方向に少し詰めて、画面内の余白を調整します。 */
   margin-top: -6px;
+  /* メニューの下に少し余白を作ります。 */
   margin-bottom: 10px;
 }
 
+/* メニュー内の各ボタンの基本デザインです。 */
 .menu-button {
+  /* flexを使って、アイコンと文字を縦に並べます。 */
   display: flex;
+  /* flexの並び方向を縦にします。 */
   flex-direction: column;
+  /* 縦方向の中央に配置します。 */
   justify-content: center;
+  /* 横方向の中央に配置します。 */
   align-items: center;
+  /* ボタンが小さくなりすぎないように最低高さを決めます。 */
   min-height: 46px;
+  /* ボタン内側の余白です。上下4px、左右2pxにします。 */
   padding: 4px 2px;
+  /* 角を少し丸くします。 */
   border-radius: 9px;
+  /* 薄い枠線を付けます。 */
   border: 1px solid rgba(0,0,0,0.08);
+  /* 少し透けた白背景にします。 */
   background-color: rgba(255,255,255,0.9);
+  /* 通常時の文字色です。 */
   color: #555;
+  /* マウスを乗せたとき、クリックできることがわかるカーソルにします。 */
   cursor: pointer;
 }
 
+/* メニューボタン内のアイコン画像です。 */
 .menu-icon {
+  /* アイコンの横幅を固定します。 */
   width: 22px;
+  /* アイコンの高さを固定します。 */
   height: 22px;
+  /* 画像の縦横比を保ったまま枠内に収めます。 */
   object-fit: contain;
+  /* アイコンと文字の間に少し余白を作ります。 */
   margin-bottom: 2px;
 }
 
+/* メニューボタン内の文字です。 */
 .menu-text {
+  /* 小さめの文字サイズにします。 */
   font-size: 10px;
+  /* 文字を太字にします。 */
   font-weight: bold;
+  /* 行の高さを詰めて、ボタン内に収まりやすくします。 */
   line-height: 1;
+  /* 文字が途中で折り返されないようにします。 */
   white-space: nowrap;
 }
 
+/* 選択中のメニューボタンです。JavaScriptがactiveクラスを付け替えます。 */
 .menu-button.active {
+  /* 選択中だとわかるように緑色にします。 */
   background-color: #2ecc71;
+  /* 緑背景でも読みやすいように文字を白にします。 */
   color: white;
+  /* 少し影を付けて、選択中のボタンを目立たせます。 */
   box-shadow: 0 3px 8px rgba(0,0,0,0.18);
 }
 
+/* メニューボタンやホームカードを押している瞬間の見た目です。 */
 .menu-button:active,
 .main-card:active {
+  /* 少し小さくして、押した感触を出します。 */
   transform: scale(0.96);
+  /* 少し暗くして、押下中だとわかるようにします。 */
   filter: brightness(0.95);
 }
 
+/* 各画面セクションの基本設定です。通常は非表示にします。 */
 .content-section {
+  /* 最初は表示しません。activeクラスが付いたものだけ表示します。 */
   display: none;
+  /* 白に近い背景で、各画面をカードのように見せます。 */
   background: rgba(255,255,255,0.94);
+  /* 角を丸くします。 */
   border-radius: 14px;
+  /* 画面内側の余白を作ります。 */
   padding: 16px;
 }
 
+/* 表示中の画面セクションです。 */
 .content-section.active {
+  /* activeクラスが付いたセクションだけ表示します。 */
   display: block;
 }
 
+/* ホーム画面専用の背景設定です。 */
 #home {
+  /* ホーム画面の背景画像を設定します。 */
   background-image: url("ichigo.png");
+  /* 画像が枠いっぱいに広がるようにします。 */
   background-size: cover;
+  /* 画像の上中央を基準に表示します。 */
   background-position: top center;
+  /* 背景画像を繰り返し表示しないようにします。 */
   background-repeat: no-repeat;
+  /* ホーム画面は背景を全面に使うため、内側余白を消します。 */
   padding: 0;
 }
 
+/* ホーム画面の上部に余白を作り、カードを下側に配置するための空間です。 */
 .home-spacer {
+  /* clampで、最小320px、理想80vw、最大420pxの高さにします。 */
   height: clamp(320px, 80vw, 420px);
 }
 
+/* ホーム画面のカードを2列で並べるエリアです。 */
 .main-grid {
+  /* gridを使ってカードを整列させます。 */
   display: grid;
+  /* 2列を同じ幅で作ります。 */
   grid-template-columns: 1fr 1fr;
+  /* カード同士のすき間を作ります。 */
   gap: 12px;
+  /* 左右に少し余白を作ります。 */
   padding: 0 10px;
 }
 
+/* ホーム画面の大きなカード型ボタンです。 */
 .main-card {
+  /* gridで、アイコン・文字・矢印を横に並べます。 */
   display: grid;
+  /* 左から、アイコン52px、文字は残り幅、矢印16pxにします。 */
   grid-template-columns: 52px 1fr 16px;
+  /* 縦方向の中央にそろえます。 */
   align-items: center;
+  /* 列同士のすき間を作ります。 */
   column-gap: 8px;
+  /* カードの高さが小さくなりすぎないようにします。 */
   min-height: 94px;
+  /* カード内側の余白です。 */
   padding: 10px;
+  /* 角を丸くします。 */
   border-radius: 14px;
+  /* カード内の文字を左寄せにします。 */
   text-align: left;
+  /* クリックできることがわかるカーソルにします。 */
   cursor: pointer;
+  /* 影を付けて、カードが浮いているように見せます。 */
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* カード内のアイコンを中央に置くための箱です。 */
 .main-card .icon {
+  /* flexでアイコンを中央配置しやすくします。 */
   display: flex;
+  /* 横方向の中央に配置します。 */
   justify-content: center;
+  /* 縦方向の中央に配置します。 */
   align-items: center;
 }
 
+/* カード内のアイコン画像サイズです。 */
 .main-card .icon img {
+  /* アイコンの横幅を固定します。 */
   width: 48px;
+  /* アイコンの高さを固定します。 */
   height: 48px;
 }
 
+/* カード内のタイトルと説明文を縦に並べる箱です。 */
 .main-card-text {
+  /* flexで文字を縦方向に並べます。 */
   display: flex;
+  /* タイトルと説明文を上下に並べます。 */
   flex-direction: column;
 }
 
+/* カードや検索結果で使うタイトル文字です。 */
 .title {
+  /* タイトルとして読みやすい大きさにします。 */
   font-size: 16px;
+  /* タイトルを太字にします。 */
   font-weight: bold;
 }
 
+/* カード内の説明文です。 */
 .desc {
+  /* 説明文はタイトルより小さくします。 */
   font-size: 12px;
+  /* 説明文の文字色を少し薄くします。 */
   color: #333;
 }
 
+/* カード右側の矢印です。 */
 .arrow {
+  /* 矢印を大きめに表示します。 */
   font-size: 22px;
+  /* grid内で右端に寄せます。 */
   justify-self: end;
 }
 
+/* バス時刻表カード専用の色です。 */
 .main-card.bus {
+  /* 薄い緑の背景にします。 */
   background-color: rgba(234,248,239,0.92);
+  /* 緑の枠線を付けます。 */
   border: 2px solid #168a45;
+  /* 文字色も緑にします。 */
   color: #168a45;
 }
 
+/* 蔵タクカード専用の色です。 */
 .main-card.taxi {
+  /* 薄い赤の背景にします。 */
   background-color: rgba(255,241,241,0.92);
+  /* 赤の枠線を付けます。 */
   border: 2px solid #e24a4a;
+  /* 文字色も赤系にします。 */
   color: #d93636;
 }
 
+/* 路線図カード専用の色です。 */
 .main-card.map {
+  /* 薄い青の背景にします。 */
   background-color: rgba(237,246,255,0.92);
+  /* 青の枠線を付けます。 */
   border: 2px solid #1e88e5;
+  /* 文字色も青にします。 */
   color: #1976d2;
 }
 
+/* よく使う場所カード専用の色です。 */
 .main-card.place {
+  /* 薄いオレンジの背景にします。 */
   background-color: rgba(255,247,230,0.92);
+  /* オレンジの枠線を付けます。 */
   border: 2px solid #f39c12;
+  /* 文字色もオレンジにします。 */
   color: #e58a00;
 }
 
+/* 通常のカードと、よく使う場所の項目カードに共通する見た目です。 */
 .card,
 .place-card-item {
+  /* 薄い枠線を付けます。 */
   border: 1px solid #ddd;
+  /* 角を丸くします。 */
   border-radius: 10px;
+  /* カード内側の余白です。 */
   padding: 12px;
+  /* 上に余白を作り、前の要素と離します。 */
   margin-top: 12px;
+  /* 明るい背景色にします。 */
   background: #fafafa;
 }
 
+/* リンクボタンと検索ボタンに共通する基本デザインです。 */
 .link-button,
 .search-button {
+  /* aタグでもボタンのように幅や余白を付けられるようにします。 */
   display: inline-block;
+  /* 上に余白を作ります。 */
   margin-top: 10px;
+  /* ボタン内側の余白です。 */
   padding: 10px 14px;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 基本のボタン背景を緑にします。 */
   background-color: #28a745;
+  /* ボタン文字を白にします。 */
   color: white;
+  /* リンクの下線を消します。 */
   text-decoration: none;
+  /* buttonタグの標準枠線を消します。 */
   border: none;
+  /* クリックできることがわかるカーソルにします。 */
   cursor: pointer;
 }
 
+/* 公式時刻表ページへのリンクボタンだけ、紫色にします。 */
 .timetable-link {
+  /* 他のリンクボタンと区別するための背景色です。 */
   background-color: #6f42c1;
 }
 
+/* Googleマップを開くリンクボタンだけ、青色にします。 */
 .map-link {
+  /* 地図リンクらしく青い背景色にします。 */
   background-color: #1f6feb;
 }
 
+/* 検索入力、プルダウン、時刻入力に共通するフォーム部品の見た目です。 */
 .stop-search,
 .route-select,
 .time-input {
+  /* 親要素いっぱいの幅にします。 */
   width: 100%;
+  /* paddingやborderを含めて幅を計算し、はみ出しにくくします。 */
   box-sizing: border-box;
+  /* 入力欄内側の余白です。 */
   padding: 10px;
+  /* 上下に余白を作ります。 */
   margin: 6px 0 12px 0;
+  /* 入力欄の角を丸くします。 */
   border-radius: 8px;
+  /* 薄い枠線を付けます。 */
   border: 1px solid #ccc;
 }
 
+/* JavaScriptで一時的に非表示にしたい要素に使います。 */
 .hidden {
+  /* 要素を画面に表示しません。 */
   display: none;
 }
 
+/* 検索ボタン専用の上書きデザインです。 */
 .search-button {
+  /* 検索ボタンは横幅いっぱいにします。 */
   width: 100%;
+  /* 検索ボタンを濃い緑にします。 */
   background-color: #168a45;
+  /* 文字を太くして目立たせます。 */
   font-weight: bold;
+  /* 影を付けて押せるボタンらしくします。 */
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  /* 押したときなどの変化をなめらかにします。 */
   transition: all 0.15s ease;
 }
 
+/* 検索ボタンを押している瞬間の見た目です。 */
 .search-button:active {
+  /* 少し小さくして押した感触を出します。 */
   transform: scale(0.96);
+  /* 影を小さくして、押し込まれたように見せます。 */
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  /* 少し暗くします。 */
   filter: brightness(0.9);
+  /* 押下中の背景色をさらに濃くします。 */
   background-color: #0f6f35;
 }
 
+/* 検索条件や並び順の選択肢をまとめる箱です。 */
 .sort-options {
+  /* 上下に余白を作ります。 */
   margin: 8px 0 12px 0;
+  /* 内側に余白を作ります。 */
   padding: 10px;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 背景を白にします。 */
   background: #ffffff;
+  /* 薄い枠線でまとまりを出します。 */
   border: 1px solid #ddd;
 }
 
+/* 検索条件や並び順の小見出しです。 */
 .sort-title {
+  /* 見出しの余白を調整します。 */
   margin: 0 0 6px 0;
+  /* 小さめの見出しサイズにします。 */
   font-size: 13px;
+  /* 見出しを太字にします。 */
   font-weight: bold;
 }
 
+/* ラジオボタンのラベルを1行ずつ表示します。 */
 .sort-options label {
+  /* labelをブロック化して縦に並べます。 */
   display: block;
+  /* 各選択肢の上下に余白を作ります。 */
   margin: 6px 0;
+  /* 選択肢の文字サイズです。 */
   font-size: 14px;
 }
 
+/* 「すべて表示する」チェックボックスのラベルです。 */
 .show-all-label {
+  /* 1つのまとまりとして表示します。 */
   display: block;
+  /* 上下に余白を作ります。 */
   margin: 8px 0;
+  /* 内側に余白を作ります。 */
   padding: 8px;
+  /* 文字サイズを設定します。 */
   font-size: 14px;
+  /* 背景を白にします。 */
   background: #fff;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 薄い枠線を付けます。 */
   border: 1px solid #ddd;
 }
 
+/* 検索結果を表示するエリアです。script.jsが中身を書き換えます。 */
 .route-search-result {
+  /* 上に余白を作り、検索ボタンと離します。 */
   margin-top: 12px;
+  /* 内側に余白を作ります。 */
   padding: 10px;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 背景を白にします。 */
   background: #ffffff;
+  /* 薄い枠線を付けます。 */
   border: 1px solid #ddd;
 }
 
+/* 検索結果1件分のカードです。 */
 .search-result-card {
+  /* 複数の結果が並ぶとき、上に余白を作ります。 */
   margin-top: 10px;
+  /* カード内側の余白です。 */
   padding: 10px;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 基本の背景色です。 */
   background: #eef8ff;
+  /* 薄い青の枠線です。 */
   border: 1px solid #b8d8ff;
+  /* 左側に太い線を付け、路線の種類を見分けやすくします。 */
   border-left: 6px solid #ccc;
+  /* 少し影を付けてカードとして目立たせます。 */
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+/* 北部方面など、緑で表したい検索結果カードです。 */
 .search-result-card.route-north {
+  /* 左線を緑にします。 */
   border-left-color: #168a45;
+  /* 背景も薄い緑にします。 */
   background: #eefaf2;
 }
 
+/* 市街地方面など、青で表したい検索結果カードです。 */
 .search-result-card.route-city {
+  /* 左線を青にします。 */
   border-left-color: #1e88e5;
+  /* 背景も薄い青にします。 */
   background: #eef6ff;
 }
 
+/* その他の路線用の検索結果カードです。 */
 .search-result-card.route-other {
+  /* 左線をグレーにします。 */
   border-left-color: #999;
 }
 
+/* 検索結果カード内の路線名行です。 */
 .route-title {
+  /* アイコン、路線名、方向バッジを横に並べます。 */
   display: flex;
+  /* 縦方向を中央にそろえます。 */
   align-items: center;
+  /* 要素同士のすき間を作ります。 */
   gap: 6px;
+  /* 下に少し余白を作ります。 */
   margin: 0 0 8px 0;
+  /* 幅が足りないときは折り返します。 */
   flex-wrap: wrap;
 }
 
+/* 路線タイトルに表示するアイコン文字です。 */
 .route-icon {
+  /* アイコンを少し大きくします。 */
   font-size: 18px;
 }
 
+/* 路線案内文です。 */
 .route-guide {
+  /* 上下の余白を整えます。 */
   margin: 6px 0 10px 0;
+  /* 案内文は少し小さめにします。 */
   font-size: 13px;
+  /* 文字色を少し薄くします。 */
   color: #555;
 }
 
+/* 東回り・西回りなどの方向を表示するバッジです。 */
 .direction-badge {
+  /* 文字幅に合わせた小さなラベルにします。 */
   display: inline-block;
+  /* 内側の余白でバッジらしい形にします。 */
   padding: 3px 8px;
+  /* 大きく丸めてカプセル型にします。 */
   border-radius: 999px;
+  /* バッジ内の文字サイズです。 */
   font-size: 12px;
+  /* バッジ内の文字を太字にします。 */
   font-weight: bold;
+  /* 色付き背景で読めるように文字を白にします。 */
   color: white;
 }
 
+/* 東回り方向のバッジ色です。 */
 .direction-east {
+  /* オレンジ色にします。 */
   background-color: #e67e22;
 }
 
+/* 西回り方向のバッジ色です。 */
 .direction-west {
+  /* 青色にします。 */
   background-color: #3498db;
 }
 
+/* その他方向のバッジ色です。 */
 .direction-other {
+  /* グレーにします。 */
   background-color: #777;
 }
 
+/* 出発時刻と到着時刻を横並びで表示する箱です。 */
 .time-display-box {
+  /* gridで、出発時刻・矢印・到着時刻を並べます。 */
   display: grid;
+  /* 左右を同じ幅、中央の矢印を28pxにします。 */
   grid-template-columns: 1fr 28px 1fr;
+  /* 縦方向を中央にそろえます。 */
   align-items: center;
+  /* 各列のすき間を作ります。 */
   gap: 6px;
+  /* 上下に余白を作ります。 */
   margin: 12px 0;
+  /* 内側に余白を作ります。 */
   padding: 12px 8px;
+  /* 角を丸くします。 */
   border-radius: 12px;
+  /* 少し透けた白背景にします。 */
   background: rgba(255,255,255,0.9);
 }
 
+/* 出発時刻・到着時刻それぞれの箱です。 */
 .time-item {
+  /* 中央寄せで時刻を見やすくします。 */
   text-align: center;
 }
 
+/* 「出発」「到着」などの小さなラベルです。 */
 .time-label {
+  /* spanをブロック表示にして、時刻と上下に並べます。 */
   display: block;
+  /* ラベルと時刻の間に余白を作ります。 */
   margin-bottom: 4px;
+  /* ラベルは小さめにします。 */
   font-size: 12px;
+  /* ラベルを太字にします。 */
   font-weight: bold;
+  /* ラベル文字を少し薄くします。 */
   color: #666;
 }
 
+/* 時刻の数字表示です。 */
 .time-value {
+  /* spanをブロック表示にします。 */
   display: block;
+  /* Google Fontsで読み込んだPoppinsを使います。 */
   font-family: 'Poppins', sans-serif;
+  /* 時刻を大きく表示します。 */
   font-size: 26px;
+  /* 太字にします。 */
   font-weight: 700;
+  /* 数字同士の間隔を少し広げます。 */
   letter-spacing: 1px;
 }
 
+/* 出発時刻の数字色です。 */
 .departure-time .time-value {
+  /* 出発は緑で表示します。 */
   color: #168a45;
 }
 
+/* 到着時刻の数字色です。 */
 .arrival-time .time-value {
+  /* 到着は赤で表示します。 */
   color: #e74c3c;
 }
 
+/* 出発時刻と到着時刻の間の矢印です。 */
 .time-arrow {
+  /* 矢印を中央寄せにします。 */
   text-align: center;
+  /* 矢印を大きくします。 */
   font-size: 22px;
+  /* 矢印を太くします。 */
   font-weight: bold;
+  /* 矢印の色です。 */
   color: #555;
 }
 
+/* 発車までの残り時間を表示する箱です。 */
 .countdown-box {
+  /* flexでラベルと値を左右に並べます。 */
   display: flex;
+  /* 左右に離して配置します。 */
   justify-content: space-between;
+  /* 縦方向を中央にそろえます。 */
   align-items: center;
+  /* 上下に余白を作ります。 */
   margin: 10px 0;
+  /* 内側に余白を作ります。 */
   padding: 10px 12px;
+  /* 大きく丸めてカプセル型にします。 */
   border-radius: 999px;
+  /* 注意を引く薄い黄色の背景にします。 */
   background: #fff4d6;
+  /* 黄色系の枠線を付けます。 */
   border: 1px solid #ffd36a;
 }
 
+/* 残り時間のラベルです。 */
 .countdown-label {
+  /* ラベルは少し小さめにします。 */
   font-size: 13px;
+  /* 太字にします。 */
   font-weight: bold;
+  /* 茶色系の文字色にします。 */
   color: #8a5a00;
 }
 
+/* 残り時間の数字です。 */
 .countdown-value {
+  /* 時刻表示と同じPoppinsを使います。 */
   font-family: 'Poppins', sans-serif;
+  /* 数字を大きめにします。 */
   font-size: 20px;
+  /* 太字にします。 */
   font-weight: 700;
+  /* オレンジ系の文字色にします。 */
   color: #d35400;
 }
 
+/* 検索結果内の補足情報です。 */
 .plan-info {
+  /* 上下の余白を少しだけ作ります。 */
   margin: 4px 0;
 }
 
+/* 検索結果の注意書きです。 */
 .result-note {
+  /* 注意書きは少し小さめにします。 */
   font-size: 13px;
+  /* 文字色を薄くします。 */
   color: #666;
 }
 
+/* すべての時刻を表示するときの箱です。 */
 .all-times-box {
+  /* 上に余白を作ります。 */
   margin-top: 10px;
+  /* 内側に余白を作ります。 */
   padding: 8px;
+  /* 角を丸くします。 */
   border-radius: 8px;
+  /* 少し透けた白背景にします。 */
   background-color: rgba(255,255,255,0.75);
 }
 
+/* すべての時刻表示エリアの見出しです。 */
 .all-times-title {
+  /* 見出しの余白を調整します。 */
   margin: 0 0 4px 0;
+  /* 小さめの見出しにします。 */
   font-size: 12px;
+  /* 太字にします。 */
   font-weight: bold;
+  /* 文字色を少し薄くします。 */
   color: #555;
 }
 
+/* すべての時刻を並べるテキストです。 */
 .all-times-list {
+  /* 標準の余白を消します。 */
   margin: 0;
+  /* 読みやすい文字サイズにします。 */
   font-size: 14px;
+  /* 行間を広げて読みやすくします。 */
   line-height: 1.6;
+  /* 長い時刻一覧でも枠からはみ出しにくくします。 */
   word-break: break-word;
 }
 
+/* 路線図画像の表示設定です。 */
 .route-map-image {
+  /* 親要素いっぱいに表示します。 */
   width: 100%;
+  /* 親要素より大きくならないようにします。 */
   max-width: 100%;
+  /* 画像の縦横比を保ちます。 */
   height: auto;
+  /* 画像の下に余計なすき間ができにくいblock表示にします。 */
   display: block;
+  /* 画像の角を丸くします。 */
   border-radius: 10px;
+  /* 薄い枠線を付けます。 */
   border: 1px solid #ddd;
+  /* 上に余白を作ります。 */
   margin-top: 10px;
 }
 
+/* 画面幅が480px以下のときだけ使う、スマートフォン向けの調整です。 */
 @media (max-width: 480px) {
+  /* スマートフォンでは、アプリ全体の左右余白を少しだけ小さくします。 */
   .app {
     padding: 14px;
   }
 
+  /* スマートフォンでは、ホーム上部の余白を画面幅に合わせて少し調整します。 */
   .home-spacer {
     height: clamp(300px, 85vw, 380px);
   }
 
+  /* スマートフォンでは、カード内のアイコン列と矢印列を少し細くします。 */
   .main-card {
     grid-template-columns: 48px 1fr 14px;
   }
 
+  /* スマートフォンでは、カード内のアイコンを少し小さくします。 */
   .main-card .icon img {
     width: 44px;
     height: 44px;
   }
 
+  /* スマートフォンでは、時刻の数字を少し小さくして収まりやすくします。 */
   .time-value {
     font-size: 24px;
   }
+
+  /* スマートフォンでは、時刻入力欄が横にはみ出さないようにします。 */
   .time-input {
     width: 100%;
     max-width: 100%;
@@ -458,11 +779,16 @@ body {
   }
 }
 
-/* 時間入力欄がスマホではみ出さないようにする */
+/* 時間入力欄がスマホではみ出さないよう、ブラウザ標準の見た目も含めて幅を調整します。 */
 .time-input {
+  /* hiddenクラスがないときは、通常の入力欄として表示します。 */
   display: block;
+  /* 親要素より大きくならないようにします。 */
   max-width: 100%;
+  /* 小さい画面でも無理に最小幅を広げないようにします。 */
   min-width: 0;
+  /* ブラウザ標準の装飾を抑えて、CSSの幅指定を効きやすくします。 */
   appearance: none;
+  /* SafariなどWebKit系ブラウザ向けにも標準装飾を抑えます。 */
   -webkit-appearance: none;
 }

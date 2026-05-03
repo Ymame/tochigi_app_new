@@ -1,229 +1,445 @@
 <!DOCTYPE html>
+<!--
+  栃木市移動サポートアプリのHTMLファイルです。
+  HTMLは画面の「骨組み」を作る言語です。
+  見た目のデザインは style.css、ボタンを押したときの動きは script.js が担当します。
+
+  このファイルでよく使うタグ・属性の説明:
+  - <!DOCTYPE html>: このファイルがHTML5で書かれていることをブラウザに伝えます。
+  - <html>: HTML全体を包む一番外側のタグです。lang="ja" は日本語ページという意味です。
+  - <head>: 画面には直接出ない設定を書きます。文字コード、タイトル、CSS読み込みなどを置きます。
+  - <meta>: 文字コードやスマートフォン表示など、ページの情報を設定します。
+  - <title>: ブラウザのタブに表示されるページ名です。
+  - <link>: 外部ファイルを読み込みます。このファイルではCSSとGoogle Fontsを読み込んでいます。
+  - <body>: 実際にブラウザ画面へ表示される内容を書きます。
+  - <div>: いくつかの要素をまとめる箱です。レイアウト調整によく使います。
+  - <nav>: メニューやナビゲーションを表すタグです。
+  - <section>: ホーム、バス検索、路線図など、画面内の大きなまとまりを表します。
+  - <button>: クリックできるボタンです。onclick でJavaScriptの処理を呼び出せます。
+  - <img>: 画像を表示します。src に画像ファイル、alt に画像の説明を書きます。
+  - <select> / <option>: 選択式の入力欄です。option が選択肢になります。
+  - <input>: ラジオボタン、チェックボックス、時刻入力などの入力部品です。
+  - <label>: 入力欄の名前を表します。for と id をそろえると入力欄と関連づきます。
+  - <a>: リンクです。href に移動先を書きます。
+  - <script>: JavaScriptファイルを読み込みます。
+
+  よく使う属性の説明:
+  - class: CSSで見た目を指定したり、JavaScriptから探したりするための名前です。同じ名前を複数の要素に使えます。
+  - id: ページ内で一つだけ使う目印です。JavaScriptやlabelのfor属性から指定できます。
+  - onclick: 要素をクリックしたときに実行するJavaScriptを書きます。
+  - data-section: JavaScriptで使うための独自データです。ここでは表示する画面名を入れています。
+  - href: リンク先のURLやファイル名を書きます。
+  - target="_blank": リンクを別タブで開く指定です。
+  - alt: 画像が表示できないときや音声読み上げで使われる、画像の説明文です。
+-->
+<!-- HTML文書全体の開始です。lang="ja" で日本語のページだと伝えます。 -->
 <html lang="ja">
+<!-- headには、画面に直接出ないページ設定を書きます。 -->
 <head>
+  <!-- UTF-8を指定して、日本語などの文字が正しく表示されるようにします。 -->
   <meta charset="UTF-8">
+
+  <!-- スマートフォンやタブレットでも、画面幅に合わせて自然に表示するための設定です。 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ブラウザのタブに表示されるタイトルです。 -->
   <title>栃木市移動サポート</title>
 
+  <!-- Google FontsからPoppinsというフォントを読み込みます。読み込んだフォントはCSS側で使えます。 -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- style.cssを読み込みます。色、余白、配置などの見た目は主にCSSで決まります。 -->
   <link rel="stylesheet" href="style.css">
+<!-- headの設定エリアはここで終わりです。 -->
 </head>
 
+<!-- bodyには、実際にブラウザ画面へ表示する内容を書きます。 -->
 <body>
+  <!-- アプリ全体を包む箱です。appクラスの見た目はstyle.cssで指定します。 -->
   <div class="app">
 
+    <!-- 画面上部のメニュー全体を表すナビゲーションです。 -->
     <nav class="menu">
+      <!-- ホーム画面へ切り替えるボタンです。activeクラスがあるので最初から選択中に見えます。 -->
       <button class="menu-button active" data-section="home" onclick="showSection('home', this)">
+        <!-- ボタンに表示する文字です。 -->
         <span class="menu-text">ホーム</span>
+      <!-- ホーム用メニューボタンの終わりです。 -->
       </button>
 
+      <!-- バス画面へ切り替えるボタンです。data-sectionとsectionのidを対応させています。 -->
       <button class="menu-button" data-section="bus" onclick="showSection('bus', this)">
+        <!-- バスメニュー用のアイコン画像です。 -->
         <img src="icons/bus.png" alt="バス" class="menu-icon">
+        <!-- ボタンに表示する文字です。 -->
         <span class="menu-text">バス</span>
+      <!-- バス用メニューボタンの終わりです。 -->
       </button>
 
+      <!-- 路線図画面へ切り替えるボタンです。 -->
       <button class="menu-button" data-section="routeMap" onclick="showSection('routeMap', this)">
+        <!-- 路線図メニュー用のアイコン画像です。 -->
         <img src="icons/map.png" alt="路線図" class="menu-icon">
+        <!-- ボタンに表示する文字です。 -->
         <span class="menu-text">路線図</span>
+      <!-- 路線図用メニューボタンの終わりです。 -->
       </button>
 
+      <!-- 蔵タク画面へ切り替えるボタンです。 -->
       <button class="menu-button" data-section="kurataku" onclick="showSection('kurataku', this)">
+        <!-- 蔵タクメニュー用のアイコン画像です。 -->
         <img src="icons/taxi.png" alt="蔵タク" class="menu-icon">
+        <!-- ボタンに表示する文字です。 -->
         <span class="menu-text">蔵タク</span>
+      <!-- 蔵タク用メニューボタンの終わりです。 -->
       </button>
 
+      <!-- よく使う場所の画面へ切り替えるボタンです。 -->
       <button class="menu-button" data-section="places" onclick="showSection('places', this)">
+        <!-- 場所メニュー用のアイコン画像です。 -->
         <img src="icons/place.png" alt="場所" class="menu-icon">
+        <!-- ボタンに表示する文字です。 -->
         <span class="menu-text">場所</span>
+      <!-- 場所用メニューボタンの終わりです。 -->
       </button>
+    <!-- メニュー全体の終わりです。 -->
     </nav>
 
+    <!-- ホーム画面の開始です。activeクラスが付いているので、ページを開いた直後に表示されます。 -->
     <section id="home" class="content-section active home-section">
+      <!-- 背景画像の上に余白を作るための空の箱です。高さなどはCSSで調整します。 -->
       <div class="home-spacer"></div>
 
+      <!-- ホーム画面の大きな選択ボタンを並べるエリアです。 -->
       <div class="main-grid">
+        <!-- バス時刻表画面へ移動するカード型ボタンです。 -->
         <button class="main-card bus" onclick="showSection('bus')">
+          <!-- カード左側に表示するバス画像です。 -->
           <div class="icon"><img src="icons/bus.png" alt="バス"></div>
+          <!-- カード内のタイトルと説明文をまとめる箱です。 -->
           <div class="main-card-text">
+            <!-- カードのタイトルです。 -->
             <div class="title">バス時刻表</div>
-            <div class="desc">時刻表の確認や次のバスをチェック</div>
+            <!-- カードの説明文です。 -->
+            <div class="desc">出発地と到着地から次のバスを検索</div>
+          <!-- タイトルと説明文の箱の終わりです。 -->
           </div>
-          <div class="arrow">›</div>
+          <!-- 右向き矢印を表示して、押せるカードだとわかりやすくします。 -->
+          <div class="arrow">&gt;</div>
+        <!-- バス時刻表カードの終わりです。 -->
         </button>
 
+        <!-- 蔵タク画面へ移動するカード型ボタンです。 -->
         <button class="main-card taxi" onclick="showSection('kurataku')">
+          <!-- カード左側に表示するタクシー画像です。 -->
           <div class="icon"><img src="icons/taxi.png" alt="タクシー"></div>
+          <!-- カード内のタイトルと説明文をまとめる箱です。 -->
           <div class="main-card-text">
+            <!-- カードのタイトルです。 -->
             <div class="title">蔵タク</div>
+            <!-- カードの説明文です。 -->
             <div class="desc">電話予約はこちらから</div>
+          <!-- タイトルと説明文の箱の終わりです。 -->
           </div>
-          <div class="arrow">›</div>
+          <!-- 右向き矢印を表示します。 -->
+          <div class="arrow">&gt;</div>
+        <!-- 蔵タクカードの終わりです。 -->
         </button>
 
+        <!-- 路線図画面へ移動するカード型ボタンです。 -->
         <button class="main-card map" onclick="showSection('routeMap')">
+          <!-- カード左側に表示する路線図画像です。 -->
           <div class="icon"><img src="icons/map.png" alt="路線図"></div>
+          <!-- カード内のタイトルと説明文をまとめる箱です。 -->
           <div class="main-card-text">
+            <!-- カードのタイトルです。 -->
             <div class="title">路線図</div>
-            <div class="desc">路線図を確認</div>
+            <!-- カードの説明文です。 -->
+            <div class="desc">全体の路線図を確認</div>
+          <!-- タイトルと説明文の箱の終わりです。 -->
           </div>
-          <div class="arrow">›</div>
+          <!-- 右向き矢印を表示します。 -->
+          <div class="arrow">&gt;</div>
+        <!-- 路線図カードの終わりです。 -->
         </button>
 
+        <!-- よく使う場所の画面へ移動するカード型ボタンです。 -->
         <button class="main-card place" onclick="showSection('places')">
+          <!-- カード左側に表示する場所アイコン画像です。 -->
           <div class="icon"><img src="icons/place.png" alt="場所"></div>
+          <!-- カード内のタイトルと説明文をまとめる箱です。 -->
           <div class="main-card-text">
+            <!-- カードのタイトルです。 -->
             <div class="title">よく使う場所</div>
-            <div class="desc">地図で場所を確認</div>
+            <!-- カードの説明文です。 -->
+            <div class="desc">地図で目的地を確認</div>
+          <!-- タイトルと説明文の箱の終わりです。 -->
           </div>
-          <div class="arrow">›</div>
+          <!-- 右向き矢印を表示します。 -->
+          <div class="arrow">&gt;</div>
+        <!-- よく使う場所カードの終わりです。 -->
         </button>
+      <!-- ホーム画面のカード一覧の終わりです。 -->
       </div>
+    <!-- ホーム画面の終わりです。 -->
     </section>
 
+    <!-- バス検索画面の開始です。selectやradioで選んだ値を script.js が読み取って検索します。 -->
     <section id="bus" class="content-section">
+      <!-- この画面の見出しです。 -->
       <h2>バス時刻表</h2>
 
+      <!-- 検索フォームをカード風にまとめる箱です。 -->
       <div class="card search-card">
+        <!-- 検索フォームの小見出しです。 -->
         <h3>出発地・到着地から検索</h3>
 
-        <label>出発地</label>
+        <!-- 出発地の入力欄名です。forとselectのidをそろえています。 -->
+        <label for="departure-select">出発地</label>
+        <!-- 出発地を選ぶためのプルダウンです。 -->
         <select id="departure-select" class="route-select">
+          <!-- 読み込み前に表示しておく仮の選択肢です。script.jsがあとで置き換えます。 -->
           <option value="">読み込み中...</option>
+        <!-- 出発地プルダウンの終わりです。 -->
         </select>
 
-        <label>到着地</label>
+        <!-- 到着地の入力欄名です。forとselectのidをそろえています。 -->
+        <label for="arrival-select">到着地</label>
+        <!-- 到着地を選ぶためのプルダウンです。 -->
         <select id="arrival-select" class="route-select">
+          <!-- 読み込み前に表示しておく仮の選択肢です。script.jsがあとで置き換えます。 -->
           <option value="">読み込み中...</option>
+        <!-- 到着地プルダウンの終わりです。 -->
         </select>
 
+        <!-- 検索の基準時刻を選ぶエリアです。 -->
         <div class="sort-options">
+          <!-- このラジオボタングループの見出しです。 -->
           <p class="sort-title">検索条件</p>
 
+          <!-- 「現在時刻から探す」を選ぶためのラベルです。 -->
           <label>
+            <!-- time-modeの値をnowにします。checkedがあるので最初から選択されています。 -->
             <input type="radio" name="time-mode" value="now" checked onchange="changeTimeMode()">
+            <!-- ラジオボタンの横に表示する説明文です。 -->
             現在時刻から探す
+          <!-- 「現在時刻から探す」ラベルの終わりです。 -->
           </label>
 
+          <!-- 「出発時刻を指定」を選ぶためのラベルです。 -->
           <label>
+            <!-- time-modeの値をdepartureにします。選ぶとchangeTimeMode()が動きます。 -->
             <input type="radio" name="time-mode" value="departure" onchange="changeTimeMode()">
-            出発時間を指定
+            <!-- ラジオボタンの横に表示する説明文です。 -->
+            出発時刻を指定
+          <!-- 「出発時刻を指定」ラベルの終わりです。 -->
           </label>
 
+          <!-- 「到着時刻を指定」を選ぶためのラベルです。 -->
           <label>
+            <!-- time-modeの値をarrivalにします。選ぶとchangeTimeMode()が動きます。 -->
             <input type="radio" name="time-mode" value="arrival" onchange="changeTimeMode()">
-            到着時間を指定
+            <!-- ラジオボタンの横に表示する説明文です。 -->
+            到着時刻を指定
+          <!-- 「到着時刻を指定」ラベルの終わりです。 -->
           </label>
 
+          <!-- 時刻を入力する欄です。hiddenクラスがあるので、最初は非表示です。 -->
           <input id="time-input" class="time-input hidden" type="time">
+        <!-- 検索条件エリアの終わりです。 -->
         </div>
 
+        <!-- 検索結果の並び順を選ぶエリアです。 -->
         <div class="sort-options">
+          <!-- このラジオボタングループの見出しです。 -->
           <p class="sort-title">並び順</p>
 
+          <!-- 「出発時刻順」を選ぶためのラベルです。 -->
           <label>
+            <!-- sort-typeの値をdepartureにします。checkedがあるので最初から選択されています。 -->
             <input type="radio" name="sort-type" value="departure" checked>
-            出発時間順
+            <!-- ラジオボタンの横に表示する説明文です。 -->
+            出発時刻順
+          <!-- 「出発時刻順」ラベルの終わりです。 -->
           </label>
 
+          <!-- 「到着時刻順」を選ぶためのラベルです。 -->
           <label>
+            <!-- sort-typeの値をarrivalにします。 -->
             <input type="radio" name="sort-type" value="arrival">
-            到着時間順
+            <!-- ラジオボタンの横に表示する説明文です。 -->
+            到着時刻順
+          <!-- 「到着時刻順」ラベルの終わりです。 -->
           </label>
 
+          <!-- 「所要時間順」を選ぶためのラベルです。 -->
           <label>
+            <!-- sort-typeの値をdurationにします。 -->
             <input type="radio" name="sort-type" value="duration">
+            <!-- ラジオボタンの横に表示する説明文です。 -->
             所要時間順
+          <!-- 「所要時間順」ラベルの終わりです。 -->
           </label>
+        <!-- 並び順エリアの終わりです。 -->
         </div>
 
+        <!-- すべての検索結果を表示するかどうかを選ぶチェックボックスのラベルです。 -->
         <label class="show-all-label">
+          <!-- チェック状態が変わるとsearchRoute()を実行して、検索結果を更新します。 -->
           <input id="show-all-results" type="checkbox" onchange="searchRoute()">
+          <!-- チェックボックスの横に表示する説明文です。 -->
           すべて表示する
+        <!-- すべて表示チェックボックスのラベルの終わりです。 -->
         </label>
 
+        <!-- 検索ボタンです。クリックすると searchRoute() が実行され、条件に合うバスを探します。 -->
         <button class="search-button" onclick="searchRoute()">検索する</button>
 
+        <!-- 検索結果を表示する場所です。script.js がこの中身を書き換えます。 -->
         <div id="route-search-result" class="route-search-result">
+          <!-- 検索前に表示しておく案内文です。 -->
           <p>出発地と到着地を選んで検索してください。</p>
+        <!-- 検索結果表示エリアの終わりです。 -->
         </div>
+      <!-- 検索フォームカードの終わりです。 -->
       </div>
 
+      <!-- 栃木市の公式ページへのリンクをまとめるカードです。 -->
       <div class="card">
-        <h3>栃木市公式 時刻表ページ</h3>
+        <!-- 公式時刻表リンクカードの見出しです。 -->
+        <h3>栃木市 公式時刻表ページ</h3>
+        <!-- リンクの説明文です。 -->
         <p>公式の時刻表案内ページを開きます。</p>
+        <!-- 公式ページへのリンクです。target="_blank"で別タブを開きます。 -->
         <a class="link-button timetable-link"
            href="https://www.city.tochigi.lg.jp/soshiki/20/325.html"
            target="_blank">
+          <!-- リンクボタンに表示する文字です。 -->
           時刻表ページを開く
+        <!-- 公式ページリンクの終わりです。 -->
         </a>
+      <!-- 公式時刻表リンクカードの終わりです。 -->
       </div>
+    <!-- バス検索画面の終わりです。 -->
     </section>
 
+    <!-- 路線図画面の開始です。画像をクリックすると route_map.png を別タブで大きく表示できます。 -->
     <section id="routeMap" class="content-section">
+      <!-- この画面の見出しです。 -->
       <h2>全体路線図</h2>
+      <!-- 路線図画面の説明文です。 -->
       <p>栃木市の全体路線図を確認できます。</p>
 
+      <!-- 路線図画像をカード風にまとめる箱です。 -->
       <div class="card">
+        <!-- 路線図カードの見出しです。 -->
         <h3>路線図画像</h3>
+        <!-- 画像の使い方を伝える説明文です。 -->
         <p>画像をタップすると拡大表示しやすくなります。</p>
+        <!-- route_map.pngを別タブで開くリンクです。 -->
         <a href="route_map.png" target="_blank">
+          <!-- 画面内に表示する路線図画像です。 -->
           <img src="route_map.png" alt="栃木市 全体路線図" class="route-map-image">
+        <!-- 路線図画像リンクの終わりです。 -->
         </a>
+      <!-- 路線図カードの終わりです。 -->
       </div>
+    <!-- 路線図画面の終わりです。 -->
     </section>
 
+    <!-- 蔵タク画面の開始です。tel:リンクを使うと、スマートフォンで電話アプリを開きやすくなります。 -->
     <section id="kurataku" class="content-section">
+      <!-- この画面の見出しです。 -->
       <h2>蔵タク</h2>
 
+      <!-- 電話発信用のカードです。 -->
       <div class="card">
+        <!-- 電話カードの見出しです。 -->
         <h3>電話</h3>
+        <!-- 電話リンクの説明文です。 -->
         <p>必要に応じて電話発信できます。</p>
+        <!-- tel:リンクです。スマートフォンでは電話アプリを開く動きになります。 -->
         <a class="link-button" href="tel:0282211234">電話する</a>
+      <!-- 電話カードの終わりです。 -->
       </div>
 
+      <!-- 蔵タクに関するメモをまとめるカードです。 -->
       <div class="card">
+        <!-- メモカードの見出しです。 -->
         <h3>メモ</h3>
+        <!-- 箇条書きリストの開始です。 -->
         <ul>
+          <!-- 1つ目のメモ項目です。 -->
           <li>予約制の移動手段</li>
+          <!-- 2つ目のメモ項目です。 -->
           <li>利用条件や料金は公式情報で確認</li>
+          <!-- 3つ目のメモ項目です。 -->
           <li>今後、詳細を追加予定</li>
+        <!-- 箇条書きリストの終わりです。 -->
         </ul>
+      <!-- メモカードの終わりです。 -->
       </div>
+    <!-- 蔵タク画面の終わりです。 -->
     </section>
 
+    <!-- よく使う場所の画面の開始です。各リンクからGoogleマップ検索を別タブで開きます。 -->
     <section id="places" class="content-section">
+      <!-- この画面の見出しです。 -->
       <h2>よく使う場所</h2>
 
+      <!-- 栃木駅の地図リンクをまとめる項目です。 -->
       <div class="place-card-item">
+        <!-- 場所の名前です。 -->
         <h3>栃木駅</h3>
+        <!-- Googleマップで栃木駅を検索するリンクです。 -->
         <a class="link-button map-link"
            href="https://www.google.com/maps/search/?api=1&query=栃木駅"
            target="_blank">
+          <!-- リンクボタンに表示する文字です。 -->
           地図を開く
+        <!-- 栃木駅の地図リンクの終わりです。 -->
         </a>
+      <!-- 栃木駅の項目の終わりです。 -->
       </div>
 
+      <!-- 栃木市役所の地図リンクをまとめる項目です。 -->
       <div class="place-card-item">
+        <!-- 場所の名前です。 -->
         <h3>栃木市役所</h3>
+        <!-- Googleマップで栃木市役所を検索するリンクです。 -->
         <a class="link-button map-link"
            href="https://www.google.com/maps/search/?api=1&query=栃木市役所"
            target="_blank">
+          <!-- リンクボタンに表示する文字です。 -->
           地図を開く
+        <!-- 栃木市役所の地図リンクの終わりです。 -->
         </a>
+      <!-- 栃木市役所の項目の終わりです。 -->
       </div>
 
+      <!-- イオン栃木店の地図リンクをまとめる項目です。 -->
       <div class="place-card-item">
+        <!-- 場所の名前です。 -->
         <h3>イオン栃木店</h3>
+        <!-- Googleマップでイオン栃木店を検索するリンクです。 -->
         <a class="link-button map-link"
            href="https://www.google.com/maps/search/?api=1&query=イオン栃木店"
            target="_blank">
+          <!-- リンクボタンに表示する文字です。 -->
           地図を開く
+        <!-- イオン栃木店の地図リンクの終わりです。 -->
         </a>
+      <!-- イオン栃木店の項目の終わりです。 -->
       </div>
+    <!-- よく使う場所の画面の終わりです。 -->
     </section>
 
+  <!-- アプリ全体を包む箱の終わりです。 -->
   </div>
 
+  <!-- 最後にscript.jsを読み込みます。先にHTMLを読み込んでおくと、JavaScriptが画面部品を見つけやすくなります。 -->
   <script src="script.js"></script>
+<!-- bodyの終わりです。ここまでが画面に表示される内容です。 -->
 </body>
+<!-- HTML文書全体の終わりです。 -->
 </html>
