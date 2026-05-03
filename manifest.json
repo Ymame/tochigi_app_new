@@ -1,0 +1,23 @@
+{
+  "name": "栃木市バス時刻表検索アプリ",
+  "short_name": "バス時刻",
+  "description": "栃木市のバス時刻を検索するアプリです。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#000044",
+  "theme_color": "#000044",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -34,7 +34,11 @@
 -->
 <!-- HTML文書全体の開始です。lang="ja" で日本語のページだと伝えます。 -->
 <html lang="ja">
+
+
+
 <!-- headには、画面に直接出ないページ設定を書きます。 -->
+
 <head>
   <!-- UTF-8を指定して、日本語などの文字が正しく表示されるようにします。 -->
   <meta charset="UTF-8">
@@ -50,8 +54,34 @@
 
   <!-- style.cssを読み込みます。色、余白、配置などの見た目は主にCSSで決まります。 -->
   <link rel="stylesheet" href="style.css">
-<!-- headの設定エリアはここで終わりです。 -->
+
+
+  <!-- headの設定エリアはここで終わりです。 -->
+  <!--260503追加↓-->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000044">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="バス時刻">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <!--260503追加↑-->
+
 </head>
+
+
+<!--260503追加↓-->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js");
+    });
+  }
+</script>
+<!--260503追加↑-->
+
+
 
 <!-- bodyには、実際にブラウザ画面へ表示する内容を書きます。 -->
 <body>
