@@ -850,3 +850,25 @@ body {
     transform: scale(1) translateY(0);
   }
 }
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】画面遷移アニメーション */
+/* 【役割】メニュー切り替え時に画面をふわっと表示する */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.content-section.active {
+  display: block;
+  animation: sectionFadeIn 0.25s ease;
+}
+
+@keyframes sectionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

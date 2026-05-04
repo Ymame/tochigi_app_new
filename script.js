@@ -676,5 +676,5 @@ window.addEventListener("load", () => {
 
   setTimeout(() => {
     splashScreen.classList.add("hide");
-  }, 2000);
+  }, 1800);
 });
