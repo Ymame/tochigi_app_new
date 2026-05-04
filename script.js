@@ -54,9 +54,19 @@ function showSection(sectionId, clickedButton) {
     section.classList.remove("active");
   });
 
-  // getElementByIdは、idが一致するHTML要素を1つ探します。
-  // classList.addでactiveを付けると、その画面だけ表示されます。
-  document.getElementById(sectionId).classList.add("active");
+  // 表示したい画面を取得します。
+  const targetSection = document.getElementById(sectionId);
+
+  // activeを付けて、画面を表示します。
+  targetSection.classList.add("active");
+
+  // アニメーションを毎回動かすため、一度クラスを外します。
+  targetSection.classList.remove("section-animate");
+
+  // 少し時間を置いてから、アニメーション用クラスを付け直します。
+  setTimeout(() => {
+    targetSection.classList.add("section-animate");
+  }, 10);
 
   // 上部メニューのボタンをすべて取得します。
   const menuButtons = document.querySelectorAll(".menu-button");
