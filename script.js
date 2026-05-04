@@ -62,10 +62,9 @@ function showSection(sectionId, clickedButton) {
   // activeを付けて、画面を表示します。
   targetSection.classList.add("active");
 
-  // 画面を表示した次の描画タイミングでクラスを付け、毎回アニメーションを発火させます。
-  requestAnimationFrame(() => {
-    targetSection.classList.add("section-animate");
-  });
+  // 表示直後の状態をブラウザに確定させてから、毎回アニメーションを発火させます。
+  targetSection.offsetHeight;
+  targetSection.classList.add("section-animate");
 
   // 上部メニューのボタンをすべて取得します。
   const menuButtons = document.querySelectorAll(".menu-button");
