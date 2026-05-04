@@ -857,13 +857,15 @@ body {
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
 .content-section.section-animate {
-  animation: sectionFadeIn 0.45s ease;
+  animation: sectionFadeIn 5s ease;
 }
+
+
 
 @keyframes sectionFadeIn {
   0% {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 0 !important;
+    transform: translateY(100px) !important;
   }
 
   100% {
