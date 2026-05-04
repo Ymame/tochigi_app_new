@@ -42,6 +42,10 @@ let routeGuides = {};
 
 // 画面を切り替える関数です。sectionIdには表示したいsectionのidが入ります。
 function showSection(sectionId, clickedButton) {
+  // 表示したい画面を取得します。見つからない場合は何もしません。
+  const targetSection = document.getElementById(sectionId);
+  if (!targetSection) return;
+
   // querySelectorAllは、条件に合うHTML要素を「全部」集めます。
   // ここでは class="content-section" が付いた画面をすべて取得します。
   const sections = document.querySelectorAll(".content-section");
@@ -52,21 +56,16 @@ function showSection(sectionId, clickedButton) {
     // classList.removeは、指定したclass名をその要素から外します。
     // activeを外すと、CSSの .content-section.active が効かなくなり非表示になります。
     section.classList.remove("active");
+    section.classList.remove("section-animate");
   });
-
-  // 表示したい画面を取得します。
-  const targetSection = document.getElementById(sectionId);
 
   // activeを付けて、画面を表示します。
   targetSection.classList.add("active");
 
-  // アニメーションを毎回動かすため、一度クラスを外します。
-  targetSection.classList.remove("section-animate");
-
-  // 少し時間を置いてから、アニメーション用クラスを付け直します。
-  setTimeout(() => {
+  // 画面を表示した次の描画タイミングでクラスを付け、毎回アニメーションを発火させます。
+  requestAnimationFrame(() => {
     targetSection.classList.add("section-animate");
-  }, 10);
+  });
 
   // 上部メニューのボタンをすべて取得します。
   const menuButtons = document.querySelectorAll(".menu-button");

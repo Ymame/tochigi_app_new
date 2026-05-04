@@ -856,16 +856,16 @@ body {
 /* 【役割】画面を切り替えたときに、ふわっと表示する */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.content-section.section-animate {
-  animation: sectionFadeIn 5s ease;
+.content-section.active.section-animate {
+  animation: sectionFadeIn 0.35s ease-out;
 }
 
 
 
 @keyframes sectionFadeIn {
   0% {
-    opacity: 0 !important;
-    transform: translateY(100px) !important;
+    opacity: 0;
+    transform: translateY(18px);
   }
 
   100% {
