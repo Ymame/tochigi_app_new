@@ -40,6 +40,48 @@ let timetable = {};
 // timetable.jsonから読み込んだ路線案内文を入れる変数です。
 let routeGuides = {};
 
+// 画面の並び順です。左右どちらからスライドするかを決めるために使います。
+const sectionOrder = ["home", "bus", "routeMap", "kurataku", "places"];
+
+// 画面遷移中の後片付けタイマーです。連続タップされたときに古い処理を止めます。
+let sectionTransitionTimer = null;
+
+// 画面遷移で使うclassと一時的な位置指定をリセットします。
+function resetSectionTransition(section) {
+  section.classList.remove(
+    "section-enter-left",
+    "section-enter-right",
+    "section-current",
+    "section-exiting",
+    "section-exit-left",
+    "section-exit-right",
+    "section-replay",
+    "section-animate"
+  );
+  section.style.top = "";
+  section.style.left = "";
+  section.style.width = "";
+}
+
+// メニューボタンの選択中表示を更新します。
+function updateActiveMenuButton(sectionId, clickedButton) {
+  const menuButtons = document.querySelectorAll(".menu-button");
+
+  menuButtons.forEach(button => {
+    button.classList.remove("active");
+  });
+
+  if (clickedButton) {
+    clickedButton.classList.add("active");
+    return;
+  }
+
+  const targetButton = document.querySelector(`.menu-button[data-section="${sectionId}"]`);
+  if (targetButton) {
+    targetButton.classList.add("active");
+  }
+}
+
 // 画面を切り替える関数です。sectionIdには表示したいsectionのidが入ります。
 function showSection(sectionId, clickedButton) {
   // 表示したい画面を取得します。見つからない場合は何もしません。
@@ -49,48 +91,64 @@ function showSection(sectionId, clickedButton) {
   // querySelectorAllは、条件に合うHTML要素を「全部」集めます。
   // ここでは class="content-section" が付いた画面をすべて取得します。
   const sections = document.querySelectorAll(".content-section");
-
-  // forEachは、集めた要素を1つずつ取り出して同じ処理をする書き方です。
-  // section => { ... } の section には、1つずつ取り出された画面セクションが入ります。
-  sections.forEach(section => {
-    // classList.removeは、指定したclass名をその要素から外します。
-    // activeを外すと、CSSの .content-section.active が効かなくなり非表示になります。
-    section.classList.remove("active");
-    section.classList.remove("section-animate");
+  const currentSection = Array.from(sections).find(section => {
+    return section.classList.contains("active") && !section.classList.contains("section-exiting");
   });
 
-  // activeを付けて、画面を表示します。
-  targetSection.classList.add("active");
-
-  // 表示直後の状態をブラウザに確定させてから、毎回アニメーションを発火させます。
-  targetSection.offsetHeight;
-  targetSection.classList.add("section-animate");
-
-  // 上部メニューのボタンをすべて取得します。
-  const menuButtons = document.querySelectorAll(".menu-button");
-
-  // すべてのメニューボタンからactiveクラスを外して、選択中表示をいったんリセットします。
-  menuButtons.forEach(button => {
-    // removeは「削除する」という意味です。ここではボタンのactiveクラスだけを削除します。
-    button.classList.remove("active");
-  });
-
-  // ifは条件分岐です。
-  // clickedButtonに値が入っている場合だけ、この中の処理を実行します。
-  if (clickedButton) {
-    // クリックされたボタンにactiveを付けて、選択中の見た目にします。
-    clickedButton.classList.add("active");
-  } else {
-    // elseは「ifに当てはまらなかった場合」です。
-    // ホームカードから移動した場合はclickedButtonがないので、ここで対応するメニューボタンを探します。
-    // querySelectorは、条件に合うHTML要素を「最初の1つだけ」探します。
-    const targetButton = document.querySelector(`.menu-button[data-section="${sectionId}"]`);
-
-    // targetButtonが見つかった場合だけ、activeを付けます。
-    if (targetButton) {
-      targetButton.classList.add("active");
-    }
+  if (sectionTransitionTimer) {
+    clearTimeout(sectionTransitionTimer);
+    sectionTransitionTimer = null;
   }
+
+  sections.forEach(section => {
+    resetSectionTransition(section);
+    if (section !== currentSection) {
+      section.classList.remove("active");
+    }
+  });
+
+  updateActiveMenuButton(sectionId, clickedButton);
+
+  // 同じ画面を押した場合は、軽い再表示アニメーションだけを動かします。
+  if (currentSection === targetSection) {
+    targetSection.classList.add("active");
+    void targetSection.offsetHeight;
+    targetSection.classList.add("section-replay");
+    return;
+  }
+
+  const currentIndex = currentSection ? sectionOrder.indexOf(currentSection.id) : -1;
+  const targetIndex = sectionOrder.indexOf(sectionId);
+  const isForward = currentIndex === -1 || targetIndex === -1 || targetIndex > currentIndex;
+
+  if (currentSection) {
+    currentSection.style.top = `${currentSection.offsetTop}px`;
+    currentSection.style.left = `${currentSection.offsetLeft}px`;
+    currentSection.style.width = `${currentSection.offsetWidth}px`;
+    currentSection.classList.add("section-exiting");
+    void currentSection.offsetHeight;
+    currentSection.classList.add(isForward ? "section-exit-left" : "section-exit-right");
+  }
+
+  targetSection.classList.add(
+    "active",
+    isForward ? "section-enter-right" : "section-enter-left"
+  );
+
+  // 開始位置を確定させてから中央へスライドさせます。
+  void targetSection.offsetHeight;
+  targetSection.classList.add("section-current");
+
+  sectionTransitionTimer = setTimeout(() => {
+    sections.forEach(section => {
+      resetSectionTransition(section);
+      if (section !== targetSection) {
+        section.classList.remove("active");
+      }
+    });
+    targetSection.classList.add("active");
+    sectionTransitionTimer = null;
+  }, 420);
 }
 
 // 時刻表データを読み込む関数です。ページ読み込み後に一度だけ実行します。

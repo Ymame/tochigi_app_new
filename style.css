@@ -36,6 +36,8 @@ body {
   padding: 16px;
   /* paddingやborderを含めて幅を計算するようにします。 */
   box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* 画面上部の5つのメニューを並べるエリアです。 */
@@ -131,6 +133,7 @@ body {
   border-radius: 14px;
   /* 画面内側の余白を作ります。 */
   padding: 16px;
+  box-sizing: border-box;
 }
 
 /* 表示中の画面セクションです。 */
@@ -853,20 +856,69 @@ body {
 
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 /* 【大項目】画面遷移アニメーション */
-/* 【役割】画面を切り替えたときに、ふわっと表示する */
+/* 【役割】iPhone風に、画面を左右へ滑らかに切り替える */
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-.content-section.active.section-animate {
-  animation: sectionFadeIn 0.45s ease-out both;
+.content-section.section-enter-left,
+.content-section.section-enter-right,
+.content-section.section-exiting {
+  display: block;
+  will-change: opacity, transform;
+  transition:
+    transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.content-section.section-enter-left,
+.content-section.section-enter-right {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+.content-section.section-enter-right {
+  transform: translateX(36px);
+}
+
+.content-section.section-enter-left {
+  transform: translateX(-36px);
+}
+
+.content-section.section-current {
+  opacity: 1;
+  transform: translateX(0);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.content-section.section-exiting {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.content-section.section-exit-left {
+  opacity: 0.72;
+  transform: translateX(-18px) scale(0.995);
+}
+
+.content-section.section-exit-right {
+  opacity: 0.72;
+  transform: translateX(18px) scale(0.995);
+}
+
+.content-section.section-replay {
+  animation: sectionReplay 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: opacity, transform;
 }
 
-
-
-@keyframes sectionFadeIn {
+@keyframes sectionReplay {
   0% {
-    opacity: 0;
-    transform: translateY(28px);
+    opacity: 0.86;
+    transform: translateY(10px);
   }
 
   100% {
