@@ -779,7 +779,7 @@ body {
   }
 }
 
-/* 時間入力欄がスマホではみ出さないよう、ブラウザ標準の見た目も含めて幅を調整します。 */
+/* 時刻指定で表示される時間入力欄です。スマホではみ出さないよう、ブラウザ標準の見た目も含めて幅を調整します。 */
 .time-input:not(.hidden) {
   /* hiddenクラスがないときは、通常の入力欄として表示します。 */
   display: block;
@@ -791,4 +791,62 @@ body {
   appearance: none;
   /* SafariなどWebKit系ブラウザ向けにも標準装飾を抑えます。 */
   -webkit-appearance: none;
+}
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/* 【大項目】スプラッシュ画面 */
+/* 【役割】アプリ起動時に表示するローディング画面 */
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(180deg, #dff7ec 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.splash-screen.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-content {
+  text-align: center;
+  animation: splashPop 0.8s ease;
+}
+
+.splash-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 24px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.splash-title {
+  margin: 18px 0 6px;
+  font-size: 30px;
+  color: #168a45;
+  font-weight: bold;
+}
+
+.splash-text {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+@keyframes splashPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }

@@ -659,5 +659,22 @@ function formatUntilDeparture(minutes) {
   return `${minutes} 分`;
 }
 
+
 // ページを開いたときに、最初に時刻表データを読み込みます。
 loadTimetable();
+
+
+//■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 【大項目】スプラッシュ画面
+// 【役割】アプリ起動時に少しだけ表示してから自動で消す
+//■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+window.addEventListener("load", () => {
+  const splashScreen = document.getElementById("splash-screen");
+
+  if (!splashScreen) return;
+
+  setTimeout(() => {
+    splashScreen.classList.add("hide");
+  }, 2000);
+});

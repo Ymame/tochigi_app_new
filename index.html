@@ -10,7 +10,7 @@
   - <head>: 画面には直接出ない設定を書きます。文字コード、タイトル、CSS読み込みなどを置きます。
   - <meta>: 文字コードやスマートフォン表示など、ページの情報を設定します。
   - <title>: ブラウザのタブに表示されるページ名です。
-  - <link>: 外部ファイルを読み込みます。このファイルではCSSとGoogle Fontsを読み込んでいます。
+  - <link>: 外部ファイルを読み込みます。このファイルではCSS、Google Fonts、PWA用のmanifestを読み込んでいます。
   - <body>: 実際にブラウザ画面へ表示される内容を書きます。
   - <div>: いくつかの要素をまとめる箱です。レイアウト調整によく使います。
   - <nav>: メニューやナビゲーションを表すタグです。
@@ -21,7 +21,7 @@
   - <input>: ラジオボタン、チェックボックス、時刻入力などの入力部品です。
   - <label>: 入力欄の名前を表します。for と id をそろえると入力欄と関連づきます。
   - <a>: リンクです。href に移動先を書きます。
-  - <script>: JavaScriptファイルを読み込みます。
+  - <script>: JavaScriptファイルを読み込んだり、このページ内に短いJavaScriptを書いたりします。
 
   よく使う属性の説明:
   - class: CSSで見た目を指定したり、JavaScriptから探したりするための名前です。同じ名前を複数の要素に使えます。
@@ -56,35 +56,56 @@
   <link rel="stylesheet" href="style.css">
 
 
-  <!-- headの設定エリアはここで終わりです。 -->
-  <!--260503追加↓-->
+  <!-- manifest.jsonを読み込み、スマートフォンのホーム画面へ追加できるPWAとして認識させます。 -->
   <link rel="manifest" href="manifest.json">
+
+  <!-- ブラウザやスマートフォンのステータスバーなどで使われるテーマカラーです。 -->
   <meta name="theme-color" content="#000044">
 
+  <!-- iPhoneのホーム画面から開いたとき、アプリのような表示に近づけるための設定です。 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- iPhoneのホーム画面に追加したときに表示される短いアプリ名です。 -->
   <meta name="apple-mobile-web-app-title" content="バス時刻">
+  <!-- iPhoneでホーム画面から開いたときのステータスバーの見た目です。 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+  <!-- iPhoneのホーム画面アイコンとして使う画像です。 -->
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <!--260503追加↑-->
+
+  <!-- headの設定エリアはここで終わりです。 -->
 
 </head>
 
 
-<!--260503追加↓-->
+<!-- Service Workerを登録して、一度読み込んだファイルをキャッシュできるようにします。 -->
 <script>
+  /* Service Workerに対応しているブラウザだけで登録処理を実行します。 */
   if ("serviceWorker" in navigator) {
+    /* ページの読み込みが終わってから登録し、初回表示の邪魔をしにくくします。 */
     window.addEventListener("load", () => {
+      /* service-worker.jsに、キャッシュするファイルや通信時の動きを書いています。 */
       navigator.serviceWorker.register("service-worker.js");
     });
   }
 </script>
-<!--260503追加↑-->
 
 
 
 <!-- bodyには、実際にブラウザ画面へ表示する内容を書きます。 -->
 <body>
+  
+  <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+  <!-- 【大項目】スプラッシュ画面 -->
+  <!-- 【役割】アプリ起動時にロゴとアプリ名を表示する -->
+  <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <img src="icons/icon-192.png" alt="とちナビ" class="splash-logo">
+      <h1 class="splash-title">とちナビ</h1>
+      <p class="splash-text">栃木市の移動をサポート</p>
+    </div>
+  </div>
+
   <!-- アプリ全体を包む箱です。appクラスの見た目はstyle.cssで指定します。 -->
   <div class="app">
 
